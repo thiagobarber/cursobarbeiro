@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="pt-BR" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curso de Barbeiro Profissional</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;display=swap" rel="stylesheet">
+  <style>
+    html { height: 100%; }
+    body { height: 100%; margin: 0; }
+
+    .font-display { font-family: 'Bebas Neue', Impact, sans-serif; }
+    .font-body { font-family: 'DM Sans', sans-serif; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+      50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.7); }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes countUp {
+      from { opacity: 0; transform: scale(0.5); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .anim-fade { animation: fadeUp 0.8s ease both; }
+    .anim-fade-d1 { animation: fadeUp 0.8s ease 0.15s both; }
+    .anim-fade-d2 { animation: fadeUp 0.8s ease 0.3s both; }
+    .anim-fade-d3 { animation: fadeUp 0.8s ease 0.45s both; }
+    .anim-fade-d4 { animation: fadeUp 0.8s ease 0.6s both; }
+    .anim-slide { animation: slideIn 0.6s ease both; }
+    .anim-count { animation: countUp 0.5s ease both; }
+    .cta-pulse { animation: pulse-glow 2s ease-in-out infinite; }
+
+    .review-card {
+      background: linear-gradient(145deg, #1a1a1a 0%, #111 100%);
+      border: 1px solid #2a2a2a;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .review-card:hover {
+      transform: translateY(-4px);
+      border-color: #d4af37;
+    }
+
+    .gold-line {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #d4af37, #f5d76e);
+    }
+
+    .diagonal-bg {
+      background: linear-gradient(135deg, #0a0a0a 0%, #0a0a0a 48%, #111 48%, #111 52%, #0a0a0a 52%);
+    }
+
+    .star { color: #d4af37; }
+
+    .noise {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .scroll-reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full overflow-auto font-body" style="background:#0a0a0a; color:#e8e8e8;">
+  <div class="noise"></div>
+  <div class="w-full relative z-10">
+   <!-- SEÇÃO 1: HERO + SOCIAL PROOF -->
+   <header id="hero-section" class="w-full relative overflow-hidden" style="background: linear-gradient(180deg, #0f0f0f 0%, #0a0a0a 100%);">
+    <div class="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10" style="background: radial-gradient(circle, #d4af37 0%, transparent 70%); filter: blur(60px);"></div>
+    <div class="max-w-4xl mx-auto px-5 pt-12 pb-16 text-center">
+     <!-- Badge -->
+     <div class="anim-fade inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8" style="background:rgba(212,175,55,0.1); border:1px solid rgba(212,175,55,0.3);">
+      <span style="color:#d4af37;" class="text-sm font-bold tracking-wide">⭐ +2.300 ALUNOS APROVAM</span>
+     </div>
+     <h1 id="el-hero-title" class="font-display anim-fade-d1 text-5xl md:text-7xl tracking-wide leading-none mb-4" style="color:#d4af37;">CURSO COMPLETO<br>
+       DE BARBEIRO PROFISSIONAL</h1>
+     <p id="el-hero-subtitle" class="anim-fade-d2 text-lg md:text-xl max-w-2xl mx-auto mb-10" style="color:#999;">Do zero ao profissional em 90 dias — domine cortes, degradês, barbas e fature alto mesmo começando do absoluto zero.</p><!-- Stats row -->
+     <div class="anim-fade-d3 flex flex-wrap justify-center gap-6 md:gap-12 mb-12">
+      <div class="text-center">
+       <div class="font-display text-4xl" style="color:#d4af37;">
+        2.347
+       </div>
+       <div class="text-xs uppercase tracking-widest" style="color:#666;">
+        Alunos
+       </div>
+      </div>
+      <div class="text-center">
+       <div class="font-display text-4xl" style="color:#d4af37;">
+        4.9
+       </div>
+       <div class="text-xs uppercase tracking-widest" style="color:#666;">
+        Avaliação
+       </div>
+      </div>
+      <div class="text-center">
+       <div class="font-display text-4xl" style="color:#d4af37;">
+        97%
+       </div>
+       <div class="text-xs uppercase tracking-widest" style="color:#666;">
+        Satisfação
+       </div>
+      </div>
+     </div><!-- Overall Rating Box -->
+     <div class="anim-fade-d4 inline-block p-6 rounded-2xl" style="background:rgba(212,175,55,0.05); border:1px solid rgba(212,175,55,0.2);">
+      <div class="flex items-center justify-center gap-1 mb-2">
+       <span class="star text-2xl">★</span> <span class="star text-2xl">★</span> <span class="star text-2xl">★</span> <span class="star text-2xl">★</span> <span class="star text-2xl">★</span>
+      </div>
+      <p class="text-sm" style="color:#aaa;">Nota <strong style="color:#d4af37;">4.9/5</strong> baseada em 847 avaliações verificadas</p>
+     </div>
+    </div>
+   </header><!-- SEÇÃO 2: REVIEWS / DEPOIMENTOS -->
+   <section id="reviews-section" class="w-full py-16 diagonal-bg">
+    <div class="max-w-5xl mx-auto px-5">
+     <div class="text-center mb-14 scroll-reveal">
+      <div class="gold-line mx-auto mb-4"></div>
+      <h2 class="font-display text-4xl md:text-5xl tracking-wide" style="color:#d4af37;">O QUE OS ALUNOS DIZEM</h2>
+      <p class="mt-3 text-base" style="color:#777;">Resultados reais de quem já transformou a vida com o curso</p>
+     </div>
+     <div class="grid md:grid-cols-3 gap-6">
+      <!-- Review 1 -->
+      <div class="review-card rounded-2xl p-6 scroll-reveal">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center font-display text-xl" style="background:linear-gradient(135deg,#d4af37,#b8941f); color:#0a0a0a;">
+         R
+        </div>
+        <div>
+         <p class="font-bold text-sm" style="color:#e8e8e8;">Rafael Oliveira</p>
+         <p class="text-xs" style="color:#666;">São Paulo, SP</p>
+        </div>
+       </div>
+       <div class="flex gap-0.5 mb-3">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+       </div>
+       <p class="text-sm leading-relaxed" style="color:#aaa;">"Eu era servente de pedreiro e <strong style="color:#e8e8e8;">em 3 meses já estava faturando R$4.500/mês</strong> na barbearia. O módulo de degradê mudou minha vida. Melhor investimento que já fiz!"</p>
+       <div class="mt-4 flex items-center gap-2 text-xs" style="color:#555;">
+        <i data-lucide="check-circle" style="width:14px;height:14px;color:#d4af37;"></i> <span>Compra verificada • há 2 meses</span>
+       </div>
+      </div><!-- Review 2 -->
+      <div class="review-card rounded-2xl p-6 scroll-reveal">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center font-display text-xl" style="background:linear-gradient(135deg,#d4af37,#b8941f); color:#0a0a0a;">
+         L
+        </div>
+        <div>
+         <p class="font-bold text-sm" style="color:#e8e8e8;">Lucas Mendes</p>
+         <p class="text-xs" style="color:#666;">Belo Horizonte, MG</p>
+        </div>
+       </div>
+       <div class="flex gap-0.5 mb-3">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+       </div>
+       <p class="text-sm leading-relaxed" style="color:#aaa;">"Já cortava cabelo em casa mas não tinha técnica. <strong style="color:#e8e8e8;">Hoje tenho minha própria barbearia</strong> e atendo 15 clientes por dia. O suporte do professor é absurdo, responde tudo!"</p>
+       <div class="mt-4 flex items-center gap-2 text-xs" style="color:#555;">
+        <i data-lucide="check-circle" style="width:14px;height:14px;color:#d4af37;"></i> <span>Compra verificada • há 1 mês</span>
+       </div>
+      </div><!-- Review 3 -->
+      <div class="review-card rounded-2xl p-6 scroll-reveal">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center font-display text-xl" style="background:linear-gradient(135deg,#d4af37,#b8941f); color:#0a0a0a;">
+         A
+        </div>
+        <div>
+         <p class="font-bold text-sm" style="color:#e8e8e8;">Amanda Silva</p>
+         <p class="text-xs" style="color:#666;">Rio de Janeiro, RJ</p>
+        </div>
+       </div>
+       <div class="flex gap-0.5 mb-3">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+       </div>
+       <p class="text-sm leading-relaxed" style="color:#aaa;">"Sou mulher e tinha receio, mas o curso é para todos. <strong style="color:#e8e8e8;">Abri meu espaço de barbear feminino</strong> e estou lotada de agenda. As aulas de barba são sensacionais!"</p>
+       <div class="mt-4 flex items-center gap-2 text-xs" style="color:#555;">
+        <i data-lucide="check-circle" style="width:14px;height:14px;color:#d4af37;"></i> <span>Compra verificada • há 3 semanas</span>
+       </div>
+      </div>
+     </div><!-- More reviews summary -->
+     <div class="mt-10 text-center scroll-reveal">
+      <div class="inline-flex flex-wrap justify-center gap-4 md:gap-8 p-6 rounded-2xl" style="background:rgba(255,255,255,0.02); border:1px solid #1a1a1a;">
+       <div class="flex items-center gap-2">
+        <i data-lucide="trending-up" style="width:18px;height:18px;color:#d4af37;"></i> <span class="text-sm" style="color:#999;"><strong style="color:#e8e8e8;">89%</strong> conseguiram emprego em 60 dias</span>
+       </div>
+       <div class="flex items-center gap-2">
+        <i data-lucide="dollar-sign" style="width:18px;height:18px;color:#d4af37;"></i> <span class="text-sm" style="color:#999;">Faturamento médio: <strong style="color:#e8e8e8;">R$3.800/mês</strong></span>
+       </div>
+       <div class="flex items-center gap-2">
+        <i data-lucide="repeat" style="width:18px;height:18px;color:#d4af37;"></i> <span class="text-sm" style="color:#999;"><strong style="color:#e8e8e8;">Zero</strong> pedidos de reembolso no último mês</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- SEÇÃO 3: CTA / OFERTA -->
+   <section id="cta-section" class="w-full py-20 relative">
+    <div class="absolute inset-0 opacity-5" style="background: radial-gradient(ellipse at center, #d4af37 0%, transparent 70%);"></div>
+    <div class="max-w-3xl mx-auto px-5 text-center relative z-10">
+     <div class="scroll-reveal">
+      <div class="gold-line mx-auto mb-6"></div>
+      <h2 class="font-display text-4xl md:text-6xl tracking-wide mb-3" style="color:#d4af37;">SUA VEZ DE MUDAR DE VIDA</h2>
+      <p class="text-base mb-10" style="color:#777;">Acesso imediato + Certificado + Suporte direto com o professor</p>
+     </div><!-- Price card -->
+     <div class="scroll-reveal rounded-3xl p-8 md:p-10 mx-auto max-w-lg" style="background:linear-gradient(145deg,#141414,#0f0f0f); border:1px solid #2a2a2a;">
+      <p class="text-sm line-through mb-1" style="color:#555;">De R$ 297,00</p>
+      <div class="flex items-baseline justify-center gap-2 mb-1">
+       <span class="text-sm" style="color:#999;">por apenas</span>
+      </div>
+      <p id="el-price" class="font-display text-6xl md:text-7xl" style="color:#d4af37;">R$ 79,90</p>
+      <p class="text-sm mt-1 mb-8" style="color:#666;">ou 12x de R$ 6,66 no cartão</p><!-- What's included -->
+      <div class="text-left space-y-3 mb-8">
+       <div class="flex items-center gap-3">
+        <i data-lucide="check" style="width:18px;height:18px;color:#d4af37;flex-shrink:0;"></i> <span class="text-sm" style="color:#ccc;">+50 aulas em vídeo HD (do básico ao avançado)</span>
+       </div>
+       <div class="flex items-center gap-3">
+        <i data-lucide="check" style="width:18px;height:18px;color:#d4af37;flex-shrink:0;"></i> <span class="text-sm" style="color:#ccc;">Módulo exclusivo de Degradê Navalhado</span>
+       </div>
+       <div class="flex items-center gap-3">
+        <i data-lucide="check" style="width:18px;height:18px;color:#d4af37;flex-shrink:0;"></i> <span class="text-sm" style="color:#ccc;">Certificado de conclusão reconhecido</span>
+       </div>
+       <div class="flex items-center gap-3">
+        <i data-lucide="check" style="width:18px;height:18px;color:#d4af37;flex-shrink:0;"></i> <span class="text-sm" style="color:#ccc;">Grupo VIP de alunos no WhatsApp</span>
+       </div>
+       <div class="flex items-center gap-3">
+        <i data-lucide="check" style="width:18px;height:18px;color:#d4af37;flex-shrink:0;"></i> <span class="text-sm" style="color:#ccc;">Acesso vitalício + atualizações grátis</span>
+       </div>
+      </div><a href="https://kiwify.app/GoSmm0n?afid=lDsyKd6u" id="el-cta-btn" target="_blank" rel="noopener noreferrer" class="cta-pulse block w-full py-4 rounded-xl font-bold text-lg tracking-wide text-center transition-all duration-200 hover:scale-105" style="background:linear-gradient(135deg,#d4af37,#c49b2a); color:#0a0a0a;"> QUERO ME INSCREVER AGORA </a>
+      <div class="flex items-center justify-center gap-2 mt-5">
+       <i data-lucide="shield-check" style="width:16px;height:16px;color:#d4af37;"></i>
+       <p id="el-guarantee" class="text-xs" style="color:#666;">7 dias de garantia incondicional — seu dinheiro de volta, sem perguntas.</p>
+      </div>
+     </div><!-- Trust badges -->
+     <div class="scroll-reveal mt-10 flex flex-wrap justify-center gap-6">
+      <div class="flex items-center gap-2 px-4 py-2 rounded-full" style="background:rgba(212,175,55,0.05); border:1px solid rgba(212,175,55,0.15);">
+       <i data-lucide="lock" style="width:14px;height:14px;color:#d4af37;"></i> <span class="text-xs" style="color:#888;">Compra segura</span>
+      </div>
+      <div class="flex items-center gap-2 px-4 py-2 rounded-full" style="background:rgba(212,175,55,0.05); border:1px solid rgba(212,175,55,0.15);">
+       <i data-lucide="credit-card" style="width:14px;height:14px;color:#d4af37;"></i> <span class="text-xs" style="color:#888;">Pix ou cartão</span>
+      </div>
+      <div class="flex items-center gap-2 px-4 py-2 rounded-full" style="background:rgba(212,175,55,0.05); border:1px solid rgba(212,175,55,0.15);">
+       <i data-lucide="zap" style="width:14px;height:14px;color:#d4af37;"></i> <span class="text-xs" style="color:#888;">Acesso imediato</span>
+      </div>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="w-full py-8 text-center" style="border-top:1px solid #1a1a1a;">
+    <p class="text-xs" style="color:#444;">© 2024 Curso de Barbeiro Profissional. Todos os direitos reservados.</p>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      hero_title: 'CURSO COMPLETO<br>DE BARBEIRO PROFISSIONAL',
+      hero_subtitle: 'Do zero ao profissional em 90 dias — domine cortes, degradês, barbas e fature alto mesmo começando do absoluto zero.',
+      cta_text: 'QUERO ME INSCREVER AGORA',
+      price_text: 'R$ 79,90',
+      guarantee_text: '7 dias de garantia incondicional — seu dinheiro de volta, sem perguntas.',
+      background_color: '#0a0a0a',
+      surface_color: '#141414',
+      text_color: '#e8e8e8',
+      accent_color: '#d4af37',
+      muted_color: '#999999',
+      font_family: 'DM Sans',
+      font_size: 16
+    };
+
+    let totalClicks = 0;
+
+    // Data SDK Handler
+    const dataHandler = {
+      onDataChanged(data) {
+        if (data && data.length > 0) {
+          const lastRecord = data[data.length - 1];
+          totalClicks = lastRecord.total_clicks || 0;
+        }
+      }
+    };
+
+    async function initDataSdk() {
+      const initResult = await window.dataSdk.init(dataHandler);
+      if (!initResult.isOk) {
+        console.error('Erro ao inicializar Data SDK:', initResult.error);
+      }
+    }
+
+    initDataSdk();
+
+    function applyConfig(config) {
+      const t = (k) => config[k] || defaultConfig[k];
+
+      document.getElementById('el-hero-title').innerHTML = t('hero_title');
+      document.getElementById('el-hero-subtitle').textContent = t('hero_subtitle');
+      document.getElementById('el-cta-btn').textContent = t('cta_text');
+      document.getElementById('el-price').textContent = t('price_text');
+      document.getElementById('el-guarantee').textContent = t('guarantee_text');
+
+      const accent = t('accent_color');
+      const textCol = t('text_color');
+      const bg = t('background_color');
+      const muted = t('muted_color');
+      const font = t('font_family');
+      const baseSize = t('font_size');
+
+      document.body.style.background = bg;
+      document.body.style.color = textCol;
+      document.body.style.fontFamily = `${font}, DM Sans, sans-serif`;
+      document.body.style.fontSize = `${baseSize}px`;
+
+      document.querySelectorAll('.font-display').forEach(el => {
+        el.style.fontFamily = `Bebas Neue, ${font}, Impact, sans-serif`;
+      });
+
+      document.querySelectorAll('[style*="color:#d4af37"], [style*="color: #d4af37"]').forEach(el => {
+        el.style.color = accent;
+      });
+
+      document.getElementById('el-cta-btn').style.background = `linear-gradient(135deg, ${accent}, ${accent}dd)`;
+    }
+
+    // Rastrear cliques no botão CTA - com organização melhorada
+    document.getElementById('el-cta-btn').addEventListener('click', async (e) => {
+      totalClicks++;
+      const now = new Date();
+      
+      // Formatar data e hora
+      const dia = now.getDate().toString().padStart(2, '0');
+      const mes = (now.getMonth() + 1).toString().padStart(2, '0');
+      const ano = now.getFullYear();
+      const dataBR = `${dia}/${mes}/${ano}`;
+      
+      const horas = now.getHours().toString().padStart(2, '0');
+      const minutos = now.getMinutes().toString().padStart(2, '0');
+      const horaBR = `${horas}:${minutos}`;
+      
+      // Determinar dia da semana
+      const dias = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+      const diaSemana = dias[now.getDay()];
+      
+      // Determinar período do dia
+      const h = now.getHours();
+      let periodo = '';
+      if (h >= 6 && h < 12) periodo = 'Manhã';
+      else if (h >= 12 && h < 18) periodo = 'Tarde';
+      else if (h >= 18 && h < 24) periodo = 'Noite';
+      else periodo = 'Madrugada';
+      
+      const clickRecord = {
+        id: `click-${Date.now()}`,
+        data_clique: dataBR,
+        hora_clique: horaBR,
+        dia_semana: diaSemana,
+        hora_periodo: periodo,
+        total_cliques_acumulados: totalClicks,
+        timestamp_iso: now.toISOString()
+      };
+
+      const result = await window.dataSdk.create(clickRecord);
+      if (!result.isOk) {
+        console.error('Erro ao registrar clique:', result.error);
+      }
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+    // Element SDK
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => applyConfig(config),
+      mapToCapabilities: (config) => {
+        const c = (key) => ({
+          get: () => config[key] || defaultConfig[key],
+          set: (v) => { config[key] = v; window.elementSdk.setConfig({ [key]: v }); }
+        });
+        return {
+          recolorables: [
+            c('background_color'),
+            c('surface_color'),
+            c('text_color'),
+            c('accent_color'),
+            c('muted_color')
+          ],
+          borderables: [],
+          fontEditable: c('font_family'),
+          fontSizeable: c('font_size')
+        };
+      },
+      mapToEditPanelValues: (config) => new Map([
+        ['hero_title', config.hero_title || defaultConfig.hero_title],
+        ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
+        ['cta_text', config.cta_text || defaultConfig.cta_text],
+        ['price_text', config.price_text || defaultConfig.price_text],
+        ['guarantee_text', config.guarantee_text || defaultConfig.guarantee_text]
+      ])
+    });
+
+    lucide.createIcons();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ef78df967d9f1e2',t:'MTc3NjcyMzgxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
