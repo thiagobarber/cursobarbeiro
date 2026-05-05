@@ -3,778 +3,199 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Barbeiro Descomplicado - Agente Virtual</title>
-  <script src="/_sdk/element_sdk.js"></script>
+  <title>Barbeiro Descomplicado</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Barlow:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
   <style>
-  * { -webkit-tap-highlight-color: transparent; }
-  body {
-    font-family: 'Barlow', sans-serif;
-    background: #0a0a0a;
-  }
-  .font-display { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; }
-  
-  /* Barber pole pattern background */
-  .barber-bg {
-    background: 
-      radial-gradient(circle at 20% 10%, rgba(220, 38, 38, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 80% 90%, rgba(234, 179, 8, 0.06) 0%, transparent 50%),
-      linear-gradient(180deg, #0a0a0a 0%, #161616 100%);
-  }
-  
-  .barber-stripes {
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 10px,
-      rgba(220, 38, 38, 0.03) 10px,
-      rgba(220, 38, 38, 0.03) 20px
-    );
-  }
-  
-  /* Chat message animations */
-  @keyframes slideInLeft {
-    from { opacity: 0; transform: translateX(-20px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-  @keyframes slideInRight {
-    from { opacity: 0; transform: translateX(20px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes pulse-dot {
-    0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
-    40% { transform: scale(1); opacity: 1; }
-  }
-  @keyframes glow {
-    0%, 100% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.3), 0 0 40px rgba(220, 38, 38, 0.1); }
-    50% { box-shadow: 0 0 30px rgba(220, 38, 38, 0.5), 0 0 60px rgba(220, 38, 38, 0.2); }
-  }
-  @keyframes shimmer {
-    0% { background-position: -200% center; }
-    100% { background-position: 200% center; }
-  }
-  @keyframes barber-spin {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 40px; }
-  }
-  
-  .msg-bot { animation: slideInLeft 0.4s ease-out; }
-  .msg-user { animation: slideInRight 0.4s ease-out; }
-  .btn-option { animation: fadeInUp 0.5s ease-out backwards; }
-  
-  .typing-dot {
-    animation: pulse-dot 1.4s infinite ease-in-out both;
-  }
-  .typing-dot:nth-child(1) { animation-delay: -0.32s; }
-  .typing-dot:nth-child(2) { animation-delay: -0.16s; }
-  
-  .cta-glow { animation: glow 2s ease-in-out infinite; }
-  
-  .shimmer-text {
-    background: linear-gradient(
-      90deg,
-      #fbbf24 0%,
-      #fef3c7 50%,
-      #fbbf24 100%
-    );
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shimmer 3s linear infinite;
-  }
-  
-  .barber-pole {
-    background: repeating-linear-gradient(
-      45deg,
-      #dc2626 0px,
-      #dc2626 8px,
-      #ffffff 8px,
-      #ffffff 16px,
-      #1e3a8a 16px,
-      #1e3a8a 24px,
-      #ffffff 24px,
-      #ffffff 32px
-    );
-    background-size: 40px 40px;
-    animation: barber-spin 2s linear infinite;
-  }
-  
-  /* Custom scrollbar */
-  .chat-scroll::-webkit-scrollbar { width: 6px; }
-  .chat-scroll::-webkit-scrollbar-track { background: #1a1a1a; }
-  .chat-scroll::-webkit-scrollbar-thumb { background: #dc2626; border-radius: 3px; }
-  .chat-scroll::-webkit-scrollbar-thumb:hover { background: #ef4444; }
-  
-  .option-btn {
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .option-btn:hover {
-    transform: translateX(4px);
-  }
-  .option-btn:active {
-    transform: scale(0.98);
-  }
-  
-  .cta-btn {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-  }
-  .cta-btn:hover {
-    transform: translateY(-2px);
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  }
-  .cta-btn:active {
-    transform: translateY(0);
-  }
-  
-  .avatar-badge {
-    background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
-    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
-  }
-  
-  .price-tag {
-    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-    box-shadow: 0 4px 20px rgba(251, 191, 36, 0.3);
-  }
-  
-  .benefit-card {
-    background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(20, 20, 20, 0.9) 100%);
-    border: 1px solid rgba(220, 38, 38, 0.2);
-    backdrop-filter: blur(10px);
-  }
-  
-  .online-indicator {
-    width: 10px;
-    height: 10px;
-    background: #22c55e;
-    border-radius: 50%;
-    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
-    animation: pulse-ring 1.5s infinite;
-  }
-  @keyframes pulse-ring {
-    0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-    70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
-  }
-</style>
+    body { font-family: 'DM Sans', sans-serif; }
+    .chat-bubble-bot { background: #1a1a2e; border-radius: 18px 18px 18px 4px; }
+    .chat-bubble-user { background: #d4af37; border-radius: 18px 18px 4px 18px; color: #1a1a2e; }
+    .option-btn { transition: all 0.2s; }
+    .option-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(212,175,55,0.3); }
+    .cta-pulse { animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{ box-shadow: 0 0 0 0 rgba(212,175,55,0.4); } 50%{ box-shadow: 0 0 0 12px rgba(212,175,55,0); } }
+    .fade-in { animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:translateY(0); } }
+    #chat-container::-webkit-scrollbar { width: 4px; }
+    #chat-container::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 4px; }
+  </style>
   <style>body { box-sizing: border-box; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
- <body class="h-full w-full">
-  <main class="barber-bg h-full w-full overflow-auto">
-   <div class="barber-stripes min-h-full w-full flex items-center justify-center p-3 md:p-6">
-    <div class="w-full max-w-2xl"><!-- Header with Logo -->
-     <header class="mb-4 md:mb-6">
-      <div class="flex items-center justify-center gap-3 mb-3">
-       <div class="barber-pole w-2 h-12 rounded-full border-2 border-white/20"></div>
-       <div class="text-center">
-        <h1 id="agent-title" class="font-display text-3xl md:text-5xl text-white tracking-wider">ISAAC <span class="shimmer-text">ARTS</span></h1>
-        <p id="agent-subtitle" class="text-gray-400 text-xs md:text-sm tracking-widest uppercase mt-1">Seu Mentor em Barbeiro</p>
-       </div>
-       <div class="barber-pole w-2 h-12 rounded-full border-2 border-white/20"></div>
-      </div>
-     </header><!-- Chat Container -->
-     <section class="benefit-card rounded-2xl overflow-hidden shadow-2xl"><!-- Chat Header -->
-      <div class="bg-gradient-to-r from-red-900/40 via-black to-red-900/40 border-b border-red-900/30 p-4 flex items-center gap-3">
-       <div class="relative">
-        <div class="avatar-badge w-12 h-12 rounded-full flex items-center justify-center border-2 border-red-500/50 overflow-hidden">
-         <img src="https://imgur.com/RG0zWDN.jpg" alt="Isaac" class="w-full h-full object-cover" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#7f1d1d'; this.alt='Isaac';">
-        </div>
-        <div class="online-indicator absolute bottom-0 right-0 border-2 border-black"></div>
-       </div>
-       <div class="flex-1">
-        <h2 class="text-white font-bold text-base md:text-lg">Isaac Arts</h2>
-        <p class="text-green-400 text-xs flex items-center gap-1"><span class="w-1.5 h-1.5 bg-green-400 rounded-full inline-block"></span> Online agora • Responde em segundos</p>
-       </div>
-       <div class="hidden md:flex items-center gap-1 text-yellow-400"><i data-lucide="star" class="w-4 h-4 fill-current"></i> <i data-lucide="star" class="w-4 h-4 fill-current"></i> <i data-lucide="star" class="w-4 h-4 fill-current"></i> <i data-lucide="star" class="w-4 h-4 fill-current"></i> <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-       </div>
-      </div><!-- Chat Messages -->
-      <div id="chat-messages" class="chat-scroll overflow-y-auto p-4 md:p-5 space-y-4" style="height: 420px;"><!-- Messages will be injected here -->
-      </div><!-- Options Area -->
-      <div id="options-area" class="border-t border-red-900/30 bg-black/40 p-4 space-y-2"><!-- Options will be injected here -->
-      </div>
-     </section><!-- Trust badges -->
-     <footer class="mt-4 md:mt-6 flex flex-wrap items-center justify-center gap-3 md:gap-6 text-gray-500 text-xs">
-      <div class="flex items-center gap-1.5"><i data-lucide="shield-check" class="w-4 h-4 text-green-500"></i> <span>Compra 100% Segura</span>
-      </div>
-      <div class="flex items-center gap-1.5"><i data-lucide="clock" class="w-4 h-4 text-yellow-500"></i> <span>Garantia de 7 dias</span>
-      </div>
-      <div class="flex items-center gap-1.5"><i data-lucide="users" class="w-4 h-4 text-red-500"></i> <span>+3.000 alunos</span>
-      </div>
-     </footer>
-    </div>
+ <body class="h-full bg-[#0f0f1a] text-white overflow-hidden">
+  <div class="h-full flex flex-col w-full max-w-md mx-auto"><!-- Header -->
+   <div class="flex items-center justify-center py-3 border-b border-[#d4af37]/20"><img src="https://imgur.com/q6vpVS9.png" alt="Barbeiro Descomplicado" class="h-12" loading="lazy" onerror="this.style.display='none';">
+   </div><!-- Chat Area -->
+   <div id="chat-container" class="flex-1 overflow-y-auto p-4 space-y-3">
+   </div><!-- Options Area -->
+   <div id="options-container" class="p-4 space-y-2 border-t border-[#d4af37]/20">
    </div>
-  </main>
+  </div>
   <script>
-  // Default configuration
-  const defaultConfig = {
-    agent_name: "ISAAC ARTS",
-    agent_subtitle: "Seu Mentor em Barbeiro",
-    welcome_message: "E aí, meu parceiro! 👋 Tudo bem? Sou o Isaac!",
-    cta_button_text: "QUERO GARANTIR MINHA VAGA AGORA",
-    cta_link: "https://kiwify.app/KfMi9ik?afid=KiBYsNLa"
-  };
+    const CTA_LINK = 'https://kiwify.app/KfMi9ik?afid=KiBYsNLa';
+    const chatContainer = document.getElementById('chat-container');
+    const optionsContainer = document.getElementById('options-container');
 
-  // Conversation flow state
-  const chatMessages = document.getElementById('chat-messages');
-  const optionsArea = document.getElementById('options-area');
-  let currentStep = 'start';
+    const defaultConfig = {
+      welcome_message: 'E aí, meu brother! 🔥',
+      primary_color: '#d4af37',
+      bg_color: '#0f0f1a',
+      text_color: '#ffffff',
+      surface_color: '#1a1a2e',
+      font_family: 'DM Sans'
+    };
 
-  // Get CTA link from config
-  function getCtaLink() {
-    return (window.elementSdk?.config?.cta_link) || defaultConfig.cta_link;
-  }
-  function getCtaText() {
-    return (window.elementSdk?.config?.cta_button_text) || defaultConfig.cta_button_text;
-  }
+    let config = { ...defaultConfig };
 
-  // Add bot message
-  function addBotMessage(text, delay = 0) {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        showTyping();
-        setTimeout(() => {
-          hideTyping();
-          const msg = document.createElement('div');
-          msg.className = 'msg-bot flex items-start gap-2 max-w-[90%]';
-          msg.innerHTML = `
-            <div class="avatar-badge w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1 border border-red-500/30 overflow-hidden">
-              <img src="https://imgur.com/RG0zWDN.jpg" alt="Isaac" class="w-full h-full object-cover" loading="lazy" onerror="this.style.background='#7f1d1d';"/>
-            </div>
-            <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 text-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-lg border border-red-900/20">
-              <p class="text-sm md:text-base leading-relaxed">${text}</p>
-            </div>
-          `;
-          chatMessages.appendChild(msg);
-          lucide.createIcons();
-          scrollToBottom();
-          resolve();
-        }, 900);
-      }, delay);
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (c) => {
+        config = c;
+        document.body.style.fontFamily = `${config.font_family || defaultConfig.font_family}, sans-serif`;
+      },
+      mapToCapabilities: (c) => ({
+        recolorables: [
+          { get: () => c.bg_color || defaultConfig.bg_color, set: (v) => { c.bg_color = v; window.elementSdk.setConfig({ bg_color: v }); document.body.style.backgroundColor = v; } },
+          { get: () => c.surface_color || defaultConfig.surface_color, set: (v) => { c.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+          { get: () => c.text_color || defaultConfig.text_color, set: (v) => { c.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+          { get: () => c.primary_color || defaultConfig.primary_color, set: (v) => { c.primary_color = v; window.elementSdk.setConfig({ primary_color: v }); } }
+        ],
+        borderables: [],
+        fontEditable: { get: () => c.font_family || defaultConfig.font_family, set: (v) => { c.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+        fontSizeable: undefined
+      }),
+      mapToEditPanelValues: (c) => new Map([
+        ['welcome_message', c.welcome_message || defaultConfig.welcome_message]
+      ])
     });
-  }
 
-  // Add user message (when they click an option)
-  function addUserMessage(text) {
-    const msg = document.createElement('div');
-    msg.className = 'msg-user flex justify-end';
-    msg.innerHTML = `
-      <div class="bg-gradient-to-br from-red-600 to-red-800 text-white rounded-2xl rounded-tr-sm px-4 py-2.5 shadow-lg max-w-[85%]">
-        <p class="text-sm md:text-base">${text}</p>
-      </div>
-    `;
-    chatMessages.appendChild(msg);
-    scrollToBottom();
-  }
+    // Chat flow engine
+    const flow = {
+      start: {
+        bot: () => `${config.welcome_message || defaultConfig.welcome_message}\n\nEu sou o assistente do curso **Barbeiro Descomplicado** ✂️\n\nMe conta: você já corta cabelo ou tá começando do zero?`,
+        options: [
+          { text: '🔰 Tô começando do zero', next: 'beginner' },
+          { text: '💈 Já corto, quero evoluir', next: 'experienced' }
+        ]
+      },
+      beginner: {
+        bot: () => `Show! Então deixa eu te fazer uma pergunta importante:\n\n**Quanto dinheiro você tá deixando na mesa todo mês por não saber cortar cabelo profissionalmente?** 💰\n\nPensa comigo: um barbeiro cobra de R$30 a R$80 por corte. Com 5 clientes por dia, são mais de R$4.000/mês!\n\nO que te impede de começar hoje?`,
+        options: [
+          { text: '😰 Tenho medo de errar', next: 'fear' },
+          { text: '💸 Não sei se vale o investimento', next: 'price' },
+          { text: '🤔 Será que consigo aprender?', next: 'doubt' }
+        ]
+      },
+      experienced: {
+        bot: () => `Boa! Então me diz:\n\n**Seus clientes voltam toda semana pedindo por VOCÊ ou vão em qualquer barbeiro?** 🤔\n\nO curso Barbeiro Descomplicado ensina técnicas avançadas que fazem o cliente virar FÃ do seu trabalho.\n\nO que te faria dar o próximo passo?`,
+        options: [
+          { text: '📈 Quero cobrar mais caro', next: 'value' },
+          { text: '💸 Tá caro pra mim agora', next: 'price' },
+          { text: '🧐 O que tem de diferente?', next: 'different' }
+        ]
+      },
+      fear: {
+        bot: () => `Eu te entendo 100%! Mas olha só:\n\n✅ O curso vai do ZERO ao avançado, passo a passo\n✅ Você pratica com calma, no seu ritmo\n✅ E ainda tem **7 dias de garantia** — se não gostar, devolvem seu dinheiro!\n\nOu seja: o único risco é continuar parado enquanto outros estão faturando 💪\n\n**Por apenas 10x de R$15,26** (ou R$127 à vista) você muda de vida!\n\nBora garantir sua vaga?`,
+        options: [
+          { text: '🚀 QUERO COMEÇAR AGORA!', next: 'cta' },
+          { text: '💸 Ainda acho caro...', next: 'price_final' }
+        ]
+      },
+      doubt: {
+        bot: () => `Brother, vou ser direto contigo:\n\nSe você sabe segurar uma máquina e uma tesoura, você CONSEGUE. 💯\n\nO método é descomplicado de verdade — do iniciante ao experiente. Milhares já aprenderam.\n\nE se em 7 dias você sentir que não é pra você? **Garantia total, dinheiro de volta.**\n\nSão apenas **10x de R$15,26** pra mudar sua história. Menos que um corte de cabelo por mês!\n\nE aí, vai ficar só olhando ou vai agir?`,
+        options: [
+          { text: '🚀 VOU AGIR! QUERO O CURSO!', next: 'cta' },
+          { text: '🤔 Me conta mais sobre o curso', next: 'different' }
+        ]
+      },
+      price: {
+        bot: () => `Entendo a preocupação! Mas faz as contas comigo:\n\n💰 O curso custa **10x de R$15,26**\n💈 UM corte de cabelo já paga a parcela do mês\n📈 No primeiro mês você já recupera o investimento!\n\nÉ literalmente o investimento mais barato que vai te dar retorno REAL.\n\nE ainda tem **7 dias de garantia** — risco ZERO pra você.\n\nO que vale mais: guardar R$15 ou aprender a faturar R$4.000+/mês?`,
+        options: [
+          { text: '🚀 FAZ SENTIDO! QUERO!', next: 'cta' },
+          { text: '😰 E se não gostar?', next: 'guarantee' }
+        ]
+      },
+      value: {
+        bot: () => `Exatamente! Quando você domina técnicas avançadas:\n\n🔥 Seus cortes ficam diferenciados\n🔥 Clientes pagam mais sem reclamar\n🔥 Você lota sua agenda por indicação\n\nO curso Barbeiro Descomplicado te leva a esse nível. E por **apenas 10x de R$15,26!**\n\n7 dias de garantia — se não evoluir, devolvem tudo.`,
+        options: [
+          { text: '🚀 QUERO EVOLUIR AGORA!', next: 'cta' },
+          { text: '🧐 O que vou aprender?', next: 'different' }
+        ]
+      },
+      different: {
+        bot: () => `O **Barbeiro Descomplicado** é completo:\n\n✂️ Do iniciante ao avançado\n📚 Técnicas de degradê, navalha, barba, química\n💼 Como montar sua barbearia\n📱 Marketing pra lotar sua agenda\n🎓 Método passo a passo, sem enrolação\n\n**Tudo isso por 10x de R$15,26** (ou R$127 à vista)\n\n🛡️ 7 dias de garantia incondicional!\n\nPronto pra transformar sua vida?`,
+        options: [
+          { text: '🚀 SIM! QUERO MINHA VAGA!', next: 'cta' },
+          { text: '💸 Ainda tô na dúvida...', next: 'price_final' }
+        ]
+      },
+      guarantee: {
+        bot: () => `Simples: você tem **7 dias de garantia TOTAL**! 🛡️\n\nSe por qualquer motivo não gostar, não aprender, ou simplesmente mudar de ideia — pede o reembolso e pronto. Sem perguntas.\n\nOu seja: ou você aprende e muda de vida, ou recebe seu dinheiro de volta. Dos dois jeitos você ganha!\n\nEntão... qual o motivo pra NÃO tentar?`,
+        options: [
+          { text: '🚀 NENHUM! QUERO O CURSO!', next: 'cta' },
+          { text: '💰 Quanto custa mesmo?', next: 'price_final' }
+        ]
+      },
+      price_final: {
+        bot: () => `Olha o resumo:\n\n💳 **10x de R$15,26** no cartão\n💵 Ou **R$127 à vista**\n🛡️ **7 dias de garantia** total\n\nIsso é MENOS que um corte de cabelo por mês pra aprender a FATURAR com cortes de cabelo!\n\nDaqui 30 dias você pode estar cortando e ganhando dinheiro ou pode estar no mesmo lugar...\n\n**A escolha é sua!** 👇`,
+        options: [
+          { text: '🚀 QUERO MUDAR MINHA VIDA!', next: 'cta' },
+          { text: '🔄 Tenho outra dúvida', next: 'start' }
+        ]
+      },
+      cta: {
+        bot: () => `🔥 **DECISÃO CERTA, BROTHER!** 🔥\n\nClica no botão abaixo pra garantir sua vaga no **Barbeiro Descomplicado** antes que o preço aumente!\n\n✂️ Do zero ao profissional\n💰 10x de R$15,26\n🛡️ 7 dias de garantia`,
+        options: [],
+        cta: true
+      }
+    };
 
-  // Typing indicator
-  function showTyping() {
-    const typing = document.createElement('div');
-    typing.id = 'typing-indicator';
-    typing.className = 'flex items-start gap-2';
-    typing.innerHTML = `
-      <div class="avatar-badge w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 border border-red-500/30 overflow-hidden">
-        <img src="https://imgur.com/RG0zWDN.jpg" alt="Isaac" class="w-full h-full object-cover" loading="lazy" onerror="this.style.background='#7f1d1d';"/>
-      </div>
-      <div class="bg-neutral-800 rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-1.5">
-        <span class="typing-dot w-2 h-2 bg-red-400 rounded-full"></span>
-        <span class="typing-dot w-2 h-2 bg-red-400 rounded-full"></span>
-        <span class="typing-dot w-2 h-2 bg-red-400 rounded-full"></span>
-      </div>
-    `;
-    chatMessages.appendChild(typing);
-    lucide.createIcons();
-    scrollToBottom();
-  }
-
-  function hideTyping() {
-    const t = document.getElementById('typing-indicator');
-    if (t) t.remove();
-  }
-
-  function scrollToBottom() {
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-
-  // Render options buttons
-  function renderOptions(options) {
-    optionsArea.innerHTML = '';
-    options.forEach((opt, i) => {
-      const btn = document.createElement('button');
-      btn.className = 'option-btn btn-option w-full text-left bg-gradient-to-r from-neutral-900 to-neutral-800 hover:from-red-900/40 hover:to-neutral-800 border border-red-900/30 hover:border-red-500 text-white rounded-xl px-4 py-3 flex items-center gap-3 group';
-      btn.style.animationDelay = `${i * 0.08}s`;
-      btn.innerHTML = `
-        <span class="w-7 h-7 rounded-full bg-red-600/20 border border-red-500/50 flex items-center justify-center text-red-400 text-xs font-bold flex-shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors">${i + 1}</span>
-        <span class="flex-1 text-sm md:text-base font-medium">${opt.label}</span>
-        <i data-lucide="chevron-right" class="w-4 h-4 text-red-500 flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
-      `;
-      btn.addEventListener('click', () => {
-        addUserMessage(opt.userText || opt.label);
-        optionsArea.innerHTML = '';
-        handleStep(opt.next);
-      });
-      optionsArea.appendChild(btn);
-    });
-    lucide.createIcons();
-  }
-
-  // Render CTA button (final conversion)
-  function renderCTA(withSecondary = true) {
-    optionsArea.innerHTML = '';
-    
-    const ctaWrap = document.createElement('div');
-    ctaWrap.className = 'space-y-2';
-    
-    const cta = document.createElement('a');
-    cta.href = getCtaLink();
-    cta.target = '_blank';
-    cta.rel = 'noopener noreferrer';
-    cta.className = 'cta-btn cta-glow btn-option w-full text-white rounded-xl px-4 py-4 flex items-center justify-center gap-2 font-bold text-sm md:text-base uppercase tracking-wide shadow-xl no-underline';
-    cta.innerHTML = `
-      <i data-lucide="zap" class="w-5 h-5"></i>
-      <span>${getCtaText()}</span>
-      <i data-lucide="arrow-right" class="w-5 h-5"></i>
-    `;
-    ctaWrap.appendChild(cta);
-
-    if (withSecondary) {
-      const secondary = document.createElement('button');
-      secondary.className = 'option-btn btn-option w-full text-left bg-neutral-900/50 hover:bg-neutral-800 border border-neutral-700 text-gray-300 rounded-xl px-4 py-2.5 flex items-center gap-2 text-sm';
-      secondary.style.animationDelay = '0.15s';
-      secondary.innerHTML = `
-        <i data-lucide="message-circle-question" class="w-4 h-4 text-yellow-500"></i>
-        <span>Ainda tenho uma dúvida</span>
-      `;
-      secondary.addEventListener('click', () => {
-        addUserMessage('Ainda tenho uma dúvida');
-        optionsArea.innerHTML = '';
-        handleStep('doubts');
-      });
-      ctaWrap.appendChild(secondary);
+    function addMessage(text, isBot) {
+      const div = document.createElement('div');
+      div.className = `fade-in ${isBot ? '' : 'flex justify-end'}`;
+      const formatted = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+      div.innerHTML = `<div class="${isBot ? 'chat-bubble-bot' : 'chat-bubble-user'} inline-block px-4 py-3 max-w-[85%] text-sm leading-relaxed">${formatted}</div>`;
+      chatContainer.appendChild(div);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
     }
-    
-    const restart = document.createElement('button');
-    restart.className = 'option-btn btn-option w-full text-center text-gray-500 hover:text-gray-300 text-xs py-1 flex items-center justify-center gap-1';
-    restart.style.animationDelay = '0.25s';
-    restart.innerHTML = `<i data-lucide="rotate-ccw" class="w-3 h-3"></i> Recomeçar a conversa`;
-    restart.addEventListener('click', restart_conversation);
-    ctaWrap.appendChild(restart);
 
-    optionsArea.appendChild(ctaWrap);
-    lucide.createIcons();
-  }
-
-  function restart_conversation() {
-    chatMessages.innerHTML = '';
-    optionsArea.innerHTML = '';
-    startConversation();
-  }
-
-  // ====== CONVERSATION FLOW ======
-  
-  async function startConversation() {
-    const welcome = (window.elementSdk?.config?.welcome_message) || defaultConfig.welcome_message;
-    
-    await addBotMessage(welcome);
-    await addBotMessage("Tô aqui pra te mostrar como <strong class='text-yellow-400'>barbeiros profissionais estão transformando suas carreiras</strong> e construindo uma vida melhor. 💈✂️", 400);
-    await addBotMessage("Antes de tudo, me conta uma coisa rapidinha... 👇", 400);
-    
-    renderOptions([
-      { label: "Nunca cortei cabelo, sou iniciante total", userText: "Sou iniciante total", next: 'q1_iniciante' },
-      { label: "Já corto, mas quero evoluir", userText: "Quero evoluir", next: 'q1_intermediario' },
-      { label: "Já sou barbeiro, quero me profissionalizar", userText: "Quero me profissionalizar", next: 'q1_avancado' }
-    ]);
-  }
-
-  // ====== PERGUNTA MATADORA 1: DOR ======
-  
-  async function handleStep(step) {
-    currentStep = step;
-    
-    switch(step) {
-      // === PERFIL INICIANTE ===
-      case 'q1_iniciante':
-        await addBotMessage("Perfeito! 🎯 Você está no lugar certo.");
-        await addBotMessage("Deixa eu te fazer uma <strong>pergunta importante</strong>... 🤔", 400);
-        await addBotMessage("<strong class='text-red-400'>Você quer aprender uma profissão que seja PROCURADA, com boa demanda de clientes e oportunidades reais?</strong>", 500);
-        renderOptions([
-          { label: "Sim! Quero uma profissão com demanda", userText: "Quero aprender uma profissão com demanda", next: 'q2_motivacao_iniciante' },
-          { label: "Quero estruturar minha própria carreira", userText: "Quero minha própria carreira", next: 'q2_carreira' },
-          { label: "Estou em busca de uma mudança", userText: "Quero uma mudança", next: 'q2_mudanca' }
-        ]);
-        break;
-
-      case 'q1_intermediario':
-        await addBotMessage("Show! 💪 Então você já conhece a profissão...");
-        await addBotMessage("Sou o Isaac e já transformei mais de 3.000 barbeiros em profissionais muito mais técnicos e reconhecidos. Deixa eu te fazer uma pergunta sincera... 🤔", 400);
-        await addBotMessage("<strong class='text-red-400'>Você sente que sua técnica limita seu crescimento profissional e acesso a clientes mais exigentes?</strong> ✂️", 500);
-        renderOptions([
-          { label: "Sim, quero dominar mais técnicas", userText: "Quero dominar mais técnicas", next: 'q2_tecnicas' },
-          { label: "Quero me posicionar como profissional premium", userText: "Quero posicionamento premium", next: 'q2_posicionamento' },
-          { label: "Quero empreender e ter minha barbearia", userText: "Quero empreender", next: 'q2_empreender' }
-        ]);
-        break;
-
-      case 'q1_avancado':
-        await addBotMessage("Excelente! 🔥 Então você já conhece o mercado...");
-        await addBotMessage("Te pergunto uma coisa direta... 🤔", 400);
-        await addBotMessage("<strong class='text-red-400'>Você quer dominar as técnicas AVANÇADAS que apenas 10% dos barbeiros do mercado conseguem executar com qualidade?</strong>", 500);
-        renderOptions([
-          { label: "Sim, quero ser um dos melhores", userText: "Quero ser top de mercado", next: 'q2_tecnicas' },
-          { label: "Quero diferenciar meu trabalho", userText: "Quero me diferenciar", next: 'q2_diferenciacao' },
-          { label: "Quero estruturar meu próprio negócio", userText: "Quero estruturar negócio", next: 'q2_empreender' }
-        ]);
-        break;
-
-      // ====== PERGUNTA MATADORA 2: MOTIVAÇÃO E GATILHO ======
-
-      case 'q2_motivacao_iniciante':
-        await addBotMessage("Essa é a atitude certa! 💡");
-        await addBotMessage("Barbeiro é uma profissão com ALTA demanda no mercado. Tem gente procurando por profissionais qualificados o tempo todo.", 500);
-        await addBotMessage("Profissionais que dominam técnicas modernas — como degradê, navalhado, desenhos — são MUITO procurados e respeitados no mercado.", 500);
-        await addBotMessage("Quer aprender do zero e se tornar um profissional qualificado? 🚀", 500);
-        renderOptions([
-          { label: "Sim! Me mostra como estruturar isso", userText: "Quero aprender tudo!", next: 'apresenta_curso' },
-          { label: "Tenho uma dúvida antes", userText: "Tenho uma dúvida", next: 'doubts' }
-        ]);
-        break;
-
-      case 'q2_carreira':
-        await addBotMessage("Ótimo pensamento! 🎯");
-        await addBotMessage("Uma carreira bem estruturada começa com o domínio técnico. Quando você sabe CORTAR BEM, as oportunidades aparecem naturalmente.", 500);
-        await addBotMessage("Você pode trabalhar em barbearias reconhecidas, montar sua clientela própria, ou até abrir seu próprio negócio depois.", 500);
-        await addBotMessage("Tudo começa aprendendo as técnicas certas! ✂️", 500);
-        renderOptions([
-          { label: "Perfeito! Quero começar", userText: "Vamos começar!", next: 'apresenta_curso' },
-          { label: "Tenho mais dúvidas", userText: "Mais dúvidas", next: 'doubts' }
-        ]);
-        break;
-
-      case 'q2_mudanca':
-        await addBotMessage("Uma mudança bem planejada começa com escolher a profissão CERTA. 🎯");
-        await addBotMessage("Barbeiro é uma profissão que oferece flexibilidade, reconhecimento e estabilidade de demanda — muito diferente de outras áreas.", 500);
-        await addBotMessage("Muitos alunos fizeram essa transição e nunca mais olharam pra trás. Quer conhecer a estrutura completa que funciona? 💪", 500);
-        renderOptions([
-          { label: "Quero conhecer a estrutura", userText: "Quero a estrutura completa", next: 'apresenta_curso' },
-          { label: "Qual o primeiro passo?", userText: "Qual é o primeiro passo?", next: 'apresenta_curso' }
-        ]);
-        break;
-
-      case 'q2_tecnicas':
-        await addBotMessage("Excelente decisão! 🔥");
-        await addBotMessage("Quando você domina <strong>cortes degradê, navalhado, social moderno, desenhos e artes no cabelo</strong>, você se diferencia completamente dos demais profissionais.", 500);
-        await addBotMessage("Clientes procuram especificamente por profissionais que executam essas técnicas com qualidade. É pura oferta e demanda de mercado! 📈", 500);
-        await addBotMessage("Quer aprender tudo isso passo a passo? 🎓", 500);
-        renderOptions([
-          { label: "Quero dominar todas essas técnicas!", userText: "Quero dominar tudo!", next: 'apresenta_curso' },
-          { label: "Em quanto tempo vou aprender?", userText: "Demora pra aprender?", next: 'objecao_tempo' }
-        ]);
-        break;
-
-      case 'q2_posicionamento':
-        await addBotMessage("Isso é estratégico! 🏆");
-        await addBotMessage("Profissionais reconhecidos por qualidade não competem por preço baixo — eles se posicionam por EXCELÊNCIA e DIFERENCIAL. É uma posição completamente diferente.", 500);
-        await addBotMessage("Quando você domina técnicas que poucos sabem fazer, o cliente <strong>procura por você</strong>, não você procurando por cliente. É totalmente diferente! 💎", 500);
-        renderOptions([
-          { label: "Quero essa posição no mercado!", userText: "Quero ser premium!", next: 'apresenta_curso' },
-          { label: "Como isso funciona na prática?", userText: "Como funciona na prática?", next: 'apresenta_curso' }
-        ]);
-        break;
-
-      case 'q2_empreender':
-        await addBotMessage("Agora você pensa como empresário! 🚀");
-        await addBotMessage("Empreender em barbearia é viável porque o produto é seus CONHECIMENTOS e sua HABILIDADE. Você é o ativo principal.", 500);
-        await addBotMessage("No curso, além de técnicas, você aprende a estruturar um negócio que realmente funciona: desde atendimento até fidelização de clientes. 📚💼", 500);
-        renderOptions([
-          { label: "Quero aprender tudo isso!", userText: "Entra o curso completo!", next: 'apresenta_curso' },
-          { label: "Qual a estrutura do negócio?", userText: "Como estruturar?", next: 'apresenta_curso' }
-        ]);
-        break;
-
-      case 'q2_diferenciacao':
-        await addBotMessage("Diferenciação é OURO puro no mercado! 💎");
-        await addBotMessage("Quando você faz algo que 90% dos barbeiros não conseguem fazer, você automaticamente se torna ESPECIAL para o cliente.", 500);
-        await addBotMessage("E cliente que reconhece qualidade não reclama de valor — ele <strong>VOLTA sempre</strong> e ainda indica pra amigos! 🤝", 500);
-        renderOptions([
-          { label: "Quero aprender a me diferenciar!", userText: "Quero me diferenciar!", next: 'apresenta_curso' },
-          { label: "Tenho outra pergunta", userText: "Outra pergunta", next: 'doubts' }
-        ]);
-        break;
-
-      // ====== APRESENTAÇÃO DO CURSO ======
-
-      case 'apresenta_curso':
-        await addBotMessage("Então se liga no que eu preparei pra você... 🎁");
-        await showCourseCard();
-        await addBotMessage("Eu criei o <strong class='text-yellow-400'>Barbeiro Descomplicado</strong> como o método completo que já transformou mais de <strong>3.000 alunos</strong> em barbeiros profissionais bem pagos! 🚀", 500);
-        await addBotMessage("Tá incluso no curso:", 400);
-        await showBenefitsList();
-        await addBotMessage("E o melhor... 👇", 400);
-        await showPriceBlock();
-        renderCTA(true);
-        break;
-
-      // ====== OBJEÇÕES ======
-
-      case 'objecao_funciona':
-        await addBotMessage("Eu entendo sua desconfiança, é normal! 👍");
-        await addBotMessage("Mas olha só os números: <strong class='text-yellow-400'>mais de 3.000 alunos já passaram pelo método</strong>, muitos sem nunca terem pego numa máquina antes.", 500);
-        await addBotMessage("E tem mais: você tem <strong class='text-green-400'>7 DIAS DE GARANTIA TOTAL</strong> ✅. Se não gostar, devolvemos 100% do seu dinheiro. Sem perguntas, sem burocracia.", 500);
-        await addBotMessage("O risco é ZERO pra você. 🛡️", 400);
-        renderOptions([
-          { label: "Beleza, me mostra o curso", userText: "Me mostra o curso", next: 'apresenta_curso' },
-          { label: "Tenho outra dúvida", userText: "Tenho outra dúvida", next: 'doubts' }
-        ]);
-        break;
-
-      case 'objecao_dinheiro':
-        await addBotMessage("Essa é a melhor parte! 😊");
-        await addBotMessage("O investimento no curso é <strong class='text-yellow-400'>MENOS do que você gastaria numa aula presencial de 1 dia</strong>.", 500);
-        await addBotMessage("E pode parcelar em até <strong>12x no cartão</strong> — ou seja, você começa a aprender HOJE e paga aos poucos. 💳", 500);
-        await addBotMessage("<strong class='text-green-400'>Com 2 ou 3 cortes você já paga a parcela do mês!</strong> Isso não é despesa, é INVESTIMENTO. 📈", 500);
-        renderOptions([
-          { label: "Faz sentido, quero ver", userText: "Faz sentido!", next: 'apresenta_curso' },
-          { label: "Quero saber o valor", userText: "Qual o valor?", next: 'apresenta_curso' }
-        ]);
-        break;
-
-      case 'objecao_clientes':
-        await addBotMessage("Ótima pergunta! 🎯");
-        await addBotMessage("Dentro do curso tem um <strong class='text-yellow-400'>módulo exclusivo de MARKETING pra barbeiros</strong>:", 500);
-        await addBotMessage("✅ Como divulgar no Instagram<br>✅ Como usar o WhatsApp pra fidelizar<br>✅ Como conseguir seus primeiros 20 clientes em 7 dias<br>✅ Scripts de abordagem prontos", 500);
-        await addBotMessage("<strong>Você vai ter fila de espera, não falta de cliente.</strong> 🔥", 400);
-        renderOptions([
-          { label: "Perfeito, quero começar!", userText: "Quero começar!", next: 'apresenta_curso' },
-          { label: "Me mostra o curso completo", userText: "Me mostra o curso", next: 'apresenta_curso' }
-        ]);
-        break;
-
-      case 'objecao_tempo':
-        await addBotMessage("Olha que rápido: ⏱️");
-        await addBotMessage("<strong class='text-yellow-400'>Em 30 dias você já está fazendo cortes profissionais</strong> e pode começar a atender clientes reais cobrando por isso.", 500);
-        await addBotMessage("O método é passo a passo, do ZERO ao avançado. Aulas práticas, diretas, sem enrolação. 🎯", 500);
-        await addBotMessage("E você assiste <strong>no seu ritmo</strong>, no celular, computador ou TV. Acesso vitalício! 📱💻", 500);
-        renderOptions([
-          { label: "Quero começar em 30 dias!", userText: "Quero começar já!", next: 'apresenta_curso' },
-          { label: "Tenho mais dúvidas", userText: "Tenho mais dúvidas", next: 'doubts' }
-        ]);
-        break;
-
-      case 'objecao_precificacao':
-        await addBotMessage("Presta atenção nisso: 💡");
-        await addBotMessage("Quando você ENTREGA um corte de alta qualidade, o cliente <strong class='text-yellow-400'>NÃO reclama do preço — ele indica pros amigos!</strong>", 500);
-        await addBotMessage("No curso eu te ensino como <strong>posicionar seu trabalho como premium</strong>, fotografar pro Instagram e fazer o cliente sentir que pagou pouco. 📸✨", 500);
-        await addBotMessage("Você vai ter clientes pagando R$ 80+ com sorriso no rosto! 😁", 400);
-        renderOptions([
-          { label: "Isso é o que eu quero!", userText: "É isso que eu quero!", next: 'apresenta_curso' },
-          { label: "Me mostra o curso", userText: "Me mostra o curso", next: 'apresenta_curso' }
-        ]);
-        break;
-
-      case 'objecao_experiencia':
-        await addBotMessage("Zero experiência necessária! 🙌");
-        await addBotMessage("O curso foi feito <strong class='text-yellow-400'>DO ZERO</strong>. Começa ensinando desde como segurar a máquina, postura, atendimento ao cliente...", 500);
-        await addBotMessage("...e vai evoluindo até técnicas avançadas como <strong>degradê americano, navalhado, desenhos e cortes sociais executivos</strong>. ✂️", 500);
-        await addBotMessage("Muitos alunos começaram sem nunca ter cortado cabelo e hoje têm barbearia própria! 🏆", 500);
-        renderOptions([
-          { label: "Perfeito! Quero começar", userText: "Quero começar do zero!", next: 'apresenta_curso' },
-          { label: "Quero ver o curso", userText: "Me mostra o curso", next: 'apresenta_curso' }
-        ]);
-        break;
-
-      // ====== DÚVIDAS GERAIS ======
-
-      case 'doubts':
-        await addBotMessage("Claro! Me diz qual sua dúvida: 🤔");
-        renderOptions([
-          { label: "Como vou receber o curso?", next: 'duvida_acesso' },
-          { label: "Tem suporte? E se eu travar?", next: 'duvida_suporte' },
-          { label: "Por quanto tempo tenho acesso?", next: 'duvida_tempo_acesso' },
-          { label: "E a garantia, como funciona?", next: 'duvida_garantia' },
-          { label: "Tá bom! Quero comprar agora", userText: "Quero comprar!", next: 'apresenta_curso' }
-        ]);
-        break;
-
-      case 'duvida_acesso':
-        await addBotMessage("Super simples! 📱");
-        await addBotMessage("Assim que você finalizar a compra, <strong class='text-yellow-400'>você recebe o acesso NA HORA</strong> no seu email.", 500);
-        await addBotMessage("É só clicar no link, criar sua senha e começar a assistir. Funciona no celular, tablet, computador ou TV! 💻", 500);
-        renderOptions([
-          { label: "Perfeito! Quero garantir o meu", userText: "Quero garantir!", next: 'apresenta_curso' },
-          { label: "Tenho outra dúvida", userText: "Outra dúvida", next: 'doubts' }
-        ]);
-        break;
-
-      case 'duvida_suporte':
-        await addBotMessage("Você tem <strong class='text-yellow-400'>suporte direto comigo e com a equipe</strong> sempre que precisar! 💬");
-        await addBotMessage("Qualquer dúvida, travou numa técnica, precisa de dica... é só chamar. Estamos juntos nessa! 🤝", 500);
-        renderOptions([
-          { label: "Beleza! Quero entrar no curso", userText: "Quero entrar!", next: 'apresenta_curso' },
-          { label: "Mais uma dúvida", userText: "Mais uma dúvida", next: 'doubts' }
-        ]);
-        break;
-
-      case 'duvida_tempo_acesso':
-        await addBotMessage("<strong class='text-yellow-400'>ACESSO VITALÍCIO!</strong> 🎉");
-        await addBotMessage("Você paga UMA vez e tem acesso PARA SEMPRE. Todas as atualizações futuras também estão inclusas. 🔄", 500);
-        await addBotMessage("Pode assistir no seu ritmo, quantas vezes quiser. 😎", 400);
-        renderOptions([
-          { label: "Amei! Quero comprar", userText: "Quero comprar!", next: 'apresenta_curso' },
-          { label: "Outra dúvida", userText: "Outra dúvida", next: 'doubts' }
-        ]);
-        break;
-
-      case 'duvida_garantia':
-        await addBotMessage("<strong class='text-green-400'>GARANTIA INCONDICIONAL DE 7 DIAS</strong> 🛡️");
-        await addBotMessage("Você compra, assiste tudo, testa o método... Se em 7 dias não gostar por QUALQUER motivo, devolvemos 100% do seu dinheiro.", 500);
-        await addBotMessage("<strong>Sem perguntas. Sem burocracia. Sem complicação.</strong> O risco é todo meu! 💪", 500);
-        renderOptions([
-          { label: "Então não tenho o que perder!", userText: "Não tenho o que perder!", next: 'apresenta_curso' },
-          { label: "Mais uma coisa...", userText: "Mais uma dúvida", next: 'doubts' }
-        ]);
-        break;
-
-      default:
-        await addBotMessage("Vamos lá! Me conta, o que você quer fazer? 🚀");
-        renderCTA(true);
-    }
-  }
-
-  // Visual cards injected in chat
-  async function showCourseCard() {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        const card = document.createElement('div');
-        card.className = 'msg-bot max-w-[95%]';
-        card.innerHTML = `
-          <div class="bg-gradient-to-br from-red-900/40 via-neutral-900 to-black border border-red-500/30 rounded-2xl p-4 shadow-2xl">
-            <div class="flex items-center gap-2 mb-2">
-              <div class="barber-pole w-1.5 h-10 rounded-full"></div>
-              <div>
-                <p class="font-display text-2xl text-white tracking-wide">BARBEIRO</p>
-                <p class="font-display text-xl shimmer-text -mt-1">DESCOMPLICADO</p>
-              </div>
-            </div>
-            <p class="text-gray-300 text-xs italic">O método completo do iniciante ao experiente</p>
-          </div>
-        `;
-        chatMessages.appendChild(card);
-        scrollToBottom();
-        resolve();
-      }, 400);
-    });
-  }
-
-  async function showBenefitsList() {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        const card = document.createElement('div');
-        card.className = 'msg-bot max-w-[95%]';
-        const benefits = [
-          { icon: 'scissors', text: 'Cortes modernos: degradê, navalhado e social' },
-          { icon: 'palette', text: 'Desenhos e artes no cabelo (o que mais paga!)' },
-          { icon: 'user-check', text: 'Atendimento premium para fidelizar clientes' },
-          { icon: 'trending-up', text: 'Marketing no Instagram pra lotar sua agenda' },
-          { icon: 'dollar-sign', text: 'Como cobrar o preço certo (e justo)' },
-          { icon: 'award', text: 'Certificado de conclusão' },
-          { icon: 'infinity', text: 'Acesso VITALÍCIO + atualizações' }
-        ];
-        card.innerHTML = `
-          <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 border border-yellow-500/20 rounded-2xl p-4 space-y-2">
-            ${benefits.map(b => `
-              <div class="flex items-start gap-2.5">
-                <div class="w-6 h-6 rounded-full bg-green-500/20 border border-green-500 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <i data-lucide="check" class="w-3.5 h-3.5 text-green-400"></i>
-                </div>
-                <p class="text-white text-sm flex-1"><i data-lucide="${b.icon}" class="w-4 h-4 inline text-yellow-400 mr-1"></i> ${b.text}</p>
-              </div>
-            `).join('')}
-          </div>
-        `;
-        chatMessages.appendChild(card);
-        lucide.createIcons();
-        scrollToBottom();
-        resolve();
-      }, 400);
-    });
-  }
-
-  async function showPriceBlock() {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        const card = document.createElement('div');
-        card.className = 'msg-bot max-w-[95%]';
-        card.innerHTML = `
-          <div class="price-tag rounded-2xl p-4 text-center shadow-2xl relative overflow-hidden">
-            <div class="absolute top-2 right-2 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Oferta</div>
-            <p class="text-neutral-900 font-bold text-xs uppercase tracking-widest mb-1">Por apenas</p>
-            <p class="text-neutral-900 text-sm line-through opacity-60">De R$ 497,00</p>
-            <p class="font-display text-5xl text-neutral-900 tracking-tight my-1">12x R$ 15,26</p>
-            <p class="text-neutral-900 font-bold text-sm">ou R$ 127,00 à vista 🔥</p>
-            <div class="mt-2 pt-2 border-t border-neutral-900/30 flex items-center justify-center gap-1 text-neutral-900 text-xs font-bold">
-              <i data-lucide="shield-check" class="w-4 h-4"></i>
-              <span>7 dias de garantia total</span>
-            </div>
-          </div>
-        `;
-        chatMessages.appendChild(card);
-        lucide.createIcons();
-        scrollToBottom();
-        resolve();
-      }, 400);
-    });
-  }
-
-  // ===== Element SDK Integration =====
-  function onConfigChange(config) {
-    const title = document.getElementById('agent-title');
-    const subtitle = document.getElementById('agent-subtitle');
-    const name = config.agent_name || defaultConfig.agent_name;
-    
-    // Split name for styling (last word gets shimmer)
-    const parts = name.split(' ');
-    if (parts.length > 1) {
-      const last = parts.pop();
-      title.innerHTML = `${parts.join(' ')} <span class="shimmer-text">${last}</span>`;
-    } else {
-      title.innerHTML = `<span class="shimmer-text">${name}</span>`;
-    }
-    
-    subtitle.textContent = config.agent_subtitle || defaultConfig.agent_subtitle;
-  }
-
-  // Initialize
-  (async function init() {
-    if (window.elementSdk) {
-      await window.elementSdk.init({
-        defaultConfig,
-        onConfigChange: async (config) => onConfigChange(config),
-        mapToCapabilities: () => ({
-          recolorables: [],
-          borderables: [],
-          fontEditable: undefined,
-          fontSizeable: undefined
-        }),
-        mapToEditPanelValues: (config) => new Map([
-          ["agent_name", config.agent_name || defaultConfig.agent_name],
-          ["agent_subtitle", config.agent_subtitle || defaultConfig.agent_subtitle],
-          ["welcome_message", config.welcome_message || defaultConfig.welcome_message],
-          ["cta_button_text", config.cta_button_text || defaultConfig.cta_button_text],
-          ["cta_link", config.cta_link || defaultConfig.cta_link]
-        ])
+    function showOptions(step) {
+      optionsContainer.innerHTML = '';
+      if (step.cta) {
+        const a = document.createElement('a');
+        a.href = CTA_LINK;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.className = 'cta-pulse block w-full text-center bg-[#d4af37] text-[#1a1a2e] font-bold py-4 rounded-xl text-lg option-btn';
+        a.textContent = '✂️ GARANTIR MINHA VAGA AGORA!';
+        optionsContainer.appendChild(a);
+        return;
+      }
+      step.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn w-full text-left px-4 py-3 rounded-xl border border-[#d4af37]/40 text-sm font-medium hover:bg-[#d4af37]/10 transition';
+        btn.textContent = opt.text;
+        btn.onclick = () => {
+          addMessage(opt.text, false);
+          optionsContainer.innerHTML = '';
+          setTimeout(() => goTo(opt.next), 600);
+        };
+        optionsContainer.appendChild(btn);
       });
     }
-    
+
+    function goTo(key) {
+      const step = flow[key];
+      addMessage(step.bot(), true);
+      setTimeout(() => showOptions(step), 400);
+    }
+
+    // Start
+    setTimeout(() => goTo('start'), 500);
+
     lucide.createIcons();
-    startConversation();
-  })();
-</script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f6faf4953b41d07',t:'MTc3Nzk4MzQ3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f6fd610914a4b29',t:'MTc3Nzk4NTA2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
