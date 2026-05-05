@@ -170,8 +170,7 @@
  <body class="h-full w-full">
   <main class="barber-bg h-full w-full overflow-auto">
    <div class="barber-stripes min-h-full w-full flex items-center justify-center p-3 md:p-6">
-    <div class="w-full max-w-2xl">
-     <!-- Header with Logo -->
+    <div class="w-full max-w-2xl"><!-- Header with Logo -->
      <header class="mb-4 md:mb-6">
       <div class="flex items-center justify-center gap-3 mb-3">
        <div class="barber-pole w-2 h-12 rounded-full border-2 border-white/20"></div>
@@ -182,11 +181,11 @@
        <div class="barber-pole w-2 h-12 rounded-full border-2 border-white/20"></div>
       </div>
      </header><!-- Chat Container -->
-     <section class="benefit-card rounded-2xl overflow-hidden shadow-2xl">
-      <!-- Chat Header -->
+     <section class="benefit-card rounded-2xl overflow-hidden shadow-2xl"><!-- Chat Header -->
       <div class="bg-gradient-to-r from-red-900/40 via-black to-red-900/40 border-b border-red-900/30 p-4 flex items-center gap-3">
        <div class="relative">
-        <div class="avatar-badge w-12 h-12 rounded-full flex items-center justify-center border-2 border-red-500/50 overflow-hidden"><img src="https://imgur.com/RG0zWDN.jpg" alt="Isaac" class="w-full h-full object-cover" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#7f1d1d'; this.alt='Isaac';">
+        <div class="avatar-badge w-12 h-12 rounded-full flex items-center justify-center border-2 border-red-500/50 overflow-hidden">
+         <img src="https://imgur.com/RG0zWDN.jpg" alt="Isaac" class="w-full h-full object-cover" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#7f1d1d'; this.alt='Isaac';">
         </div>
         <div class="online-indicator absolute bottom-0 right-0 border-2 border-black"></div>
        </div>
@@ -194,26 +193,20 @@
         <h2 class="text-white font-bold text-base md:text-lg">Isaac Arts</h2>
         <p class="text-green-400 text-xs flex items-center gap-1"><span class="w-1.5 h-1.5 bg-green-400 rounded-full inline-block"></span> Online agora • Responde em segundos</p>
        </div>
-       <div class="hidden md:flex items-center gap-1 text-yellow-400">
-        <i data-lucide="star" class="w-4 h-4 fill-current"></i> <i data-lucide="star" class="w-4 h-4 fill-current"></i> <i data-lucide="star" class="w-4 h-4 fill-current"></i> <i data-lucide="star" class="w-4 h-4 fill-current"></i> <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+       <div class="hidden md:flex items-center gap-1 text-yellow-400"><i data-lucide="star" class="w-4 h-4 fill-current"></i> <i data-lucide="star" class="w-4 h-4 fill-current"></i> <i data-lucide="star" class="w-4 h-4 fill-current"></i> <i data-lucide="star" class="w-4 h-4 fill-current"></i> <i data-lucide="star" class="w-4 h-4 fill-current"></i>
        </div>
       </div><!-- Chat Messages -->
-      <div id="chat-messages" class="chat-scroll overflow-y-auto p-4 md:p-5 space-y-4" style="height: 420px;">
-       <!-- Messages will be injected here -->
+      <div id="chat-messages" class="chat-scroll overflow-y-auto p-4 md:p-5 space-y-4" style="height: 420px;"><!-- Messages will be injected here -->
       </div><!-- Options Area -->
-      <div id="options-area" class="border-t border-red-900/30 bg-black/40 p-4 space-y-2">
-       <!-- Options will be injected here -->
+      <div id="options-area" class="border-t border-red-900/30 bg-black/40 p-4 space-y-2"><!-- Options will be injected here -->
       </div>
      </section><!-- Trust badges -->
      <footer class="mt-4 md:mt-6 flex flex-wrap items-center justify-center gap-3 md:gap-6 text-gray-500 text-xs">
-      <div class="flex items-center gap-1.5">
-       <i data-lucide="shield-check" class="w-4 h-4 text-green-500"></i> <span>Compra 100% Segura</span>
+      <div class="flex items-center gap-1.5"><i data-lucide="shield-check" class="w-4 h-4 text-green-500"></i> <span>Compra 100% Segura</span>
       </div>
-      <div class="flex items-center gap-1.5">
-       <i data-lucide="clock" class="w-4 h-4 text-yellow-500"></i> <span>Garantia de 7 dias</span>
+      <div class="flex items-center gap-1.5"><i data-lucide="clock" class="w-4 h-4 text-yellow-500"></i> <span>Garantia de 7 dias</span>
       </div>
-      <div class="flex items-center gap-1.5">
-       <i data-lucide="users" class="w-4 h-4 text-red-500"></i> <span>+3.000 alunos</span>
+      <div class="flex items-center gap-1.5"><i data-lucide="users" class="w-4 h-4 text-red-500"></i> <span>+3.000 alunos</span>
       </div>
      </footer>
     </div>
@@ -390,12 +383,12 @@
     const welcome = (window.elementSdk?.config?.welcome_message) || defaultConfig.welcome_message;
     
     await addBotMessage(welcome);
-    await addBotMessage("Tô aqui pra te mostrar como você pode <strong class='text-yellow-400'>faturar de R$ 3.000 a R$ 10.000 por mês</strong> como barbeiro profissional. 💈✂️", 400);
+    await addBotMessage("Tô aqui pra te mostrar como <strong class='text-yellow-400'>barbeiros profissionais estão transformando suas carreiras</strong> e construindo uma vida melhor. 💈✂️", 400);
     await addBotMessage("Antes de tudo, me conta uma coisa rapidinha... 👇", 400);
     
     renderOptions([
       { label: "Nunca cortei cabelo, sou iniciante total", userText: "Sou iniciante total", next: 'q1_iniciante' },
-      { label: "Já corto, mas quero evoluir e ganhar mais", userText: "Quero evoluir e ganhar mais", next: 'q1_intermediario' },
+      { label: "Já corto, mas quero evoluir", userText: "Quero evoluir", next: 'q1_intermediario' },
       { label: "Já sou barbeiro, quero me profissionalizar", userText: "Quero me profissionalizar", next: 'q1_avancado' }
     ]);
   }
@@ -410,112 +403,108 @@
       case 'q1_iniciante':
         await addBotMessage("Perfeito! 🎯 Você está no lugar certo.");
         await addBotMessage("Deixa eu te fazer uma <strong>pergunta importante</strong>... 🤔", 400);
-        await addBotMessage("<strong class='text-red-400'>Você está CANSADO de trabalhar duro e ainda não ter dinheiro sobrando no final do mês?</strong> 💸", 500);
+        await addBotMessage("<strong class='text-red-400'>Você quer aprender uma profissão que seja PROCURADA, com boa demanda de clientes e oportunidades reais?</strong>", 500);
         renderOptions([
-          { label: "Sim! Tô cansado dessa vida", userText: "Tô cansado dessa vida", next: 'q2_dor_financeira' },
-          { label: "Na verdade, estou desempregado", userText: "Estou desempregado", next: 'q2_desempregado' },
-          { label: "Quero uma renda extra", userText: "Quero uma renda extra", next: 'q2_renda_extra' }
+          { label: "Sim! Quero uma profissão com demanda", userText: "Quero aprender uma profissão com demanda", next: 'q2_motivacao_iniciante' },
+          { label: "Quero estruturar minha própria carreira", userText: "Quero minha própria carreira", next: 'q2_carreira' },
+          { label: "Estou em busca de uma mudança", userText: "Quero uma mudança", next: 'q2_mudanca' }
         ]);
         break;
 
       case 'q1_intermediario':
-        await addBotMessage("Show! 💪 Então você já sabe o potencial dessa profissão...");
-        await addBotMessage("Eu sou o Isaac e já transformei mais de 3.000 barbeiros em profissionais bem pagos. Deixa eu te fazer uma pergunta sincera... 🤔", 400);
-        await addBotMessage("<strong class='text-red-400'>Você sente que trava na hora de fazer certos cortes e acaba perdendo clientes pra barbearias mais modernas?</strong> ✂️", 500);
+        await addBotMessage("Show! 💪 Então você já conhece a profissão...");
+        await addBotMessage("Sou o Isaac e já transformei mais de 3.000 barbeiros em profissionais muito mais técnicos e reconhecidos. Deixa eu te fazer uma pergunta sincera... 🤔", 400);
+        await addBotMessage("<strong class='text-red-400'>Você sente que sua técnica limita seu crescimento profissional e acesso a clientes mais exigentes?</strong> ✂️", 500);
         renderOptions([
-          { label: "Sim, perco clientes por causa disso", userText: "Perco clientes por isso", next: 'q2_dor_tecnica' },
-          { label: "Quero cobrar mais caro pelos meus cortes", userText: "Quero cobrar mais caro", next: 'q2_precificacao' },
-          { label: "Quero ter minha própria barbearia", userText: "Quero abrir minha barbearia", next: 'q2_barbearia' }
+          { label: "Sim, quero dominar mais técnicas", userText: "Quero dominar mais técnicas", next: 'q2_tecnicas' },
+          { label: "Quero me posicionar como profissional premium", userText: "Quero posicionamento premium", next: 'q2_posicionamento' },
+          { label: "Quero empreender e ter minha barbearia", userText: "Quero empreender", next: 'q2_empreender' }
         ]);
         break;
 
       case 'q1_avancado':
-        await addBotMessage("Excelente! 🔥 Sou o Isaac e te garanto que o mercado não perdoa quem fica parado...");
+        await addBotMessage("Excelente! 🔥 Então você já conhece o mercado...");
         await addBotMessage("Te pergunto uma coisa direta... 🤔", 400);
-        await addBotMessage("<strong class='text-red-400'>Você já pensou o quanto mais poderia faturar dominando TÉCNICAS AVANÇADAS que 90% dos barbeiros não sabem fazer?</strong> 💰", 500);
+        await addBotMessage("<strong class='text-red-400'>Você quer dominar as técnicas AVANÇADAS que apenas 10% dos barbeiros do mercado conseguem executar com qualidade?</strong>", 500);
         renderOptions([
-          { label: "Sim, quero dominar técnicas novas", userText: "Quero técnicas avançadas", next: 'q2_dor_tecnica' },
-          { label: "Quero subir meu ticket médio", userText: "Quero cobrar mais", next: 'q2_precificacao' },
-          { label: "Quero virar referência na minha cidade", userText: "Quero ser referência", next: 'q2_referencia' }
+          { label: "Sim, quero ser um dos melhores", userText: "Quero ser top de mercado", next: 'q2_tecnicas' },
+          { label: "Quero diferenciar meu trabalho", userText: "Quero me diferenciar", next: 'q2_diferenciacao' },
+          { label: "Quero estruturar meu próprio negócio", userText: "Quero estruturar negócio", next: 'q2_empreender' }
         ]);
         break;
 
-      // ====== PERGUNTA MATADORA 2: GANHO ======
+      // ====== PERGUNTA MATADORA 2: MOTIVAÇÃO E GATILHO ======
 
-      case 'q2_dor_financeira':
-        await addBotMessage("Eu entendo perfeitamente essa sensação... 😔");
-        await addBotMessage("Muita gente tá trabalhando 10, 12 horas por dia e no fim do mês não consegue nem pagar as contas direito.", 500);
-        await addBotMessage("Mas agora olha só... 👀", 400);
-        await addBotMessage("<strong class='text-yellow-400'>Imagina você trabalhando 6 horas por dia, com sua própria clientela, faturando R$ 5.000 a R$ 10.000 por mês fazendo cortes modernos?</strong> 💵✨", 500);
-        await addBotMessage("É isso que meus alunos estão conquistando. Quer saber como? 🚀", 500);
+      case 'q2_motivacao_iniciante':
+        await addBotMessage("Essa é a atitude certa! 💡");
+        await addBotMessage("Barbeiro é uma profissão com ALTA demanda no mercado. Tem gente procurando por profissionais qualificados o tempo todo.", 500);
+        await addBotMessage("Profissionais que dominam técnicas modernas — como degradê, navalhado, desenhos — são MUITO procurados e respeitados no mercado.", 500);
+        await addBotMessage("Quer aprender do zero e se tornar um profissional qualificado? 🚀", 500);
         renderOptions([
-          { label: "SIM! Me mostra como fazer isso", userText: "Quero saber como!", next: 'apresenta_curso' },
-          { label: "Parece bom demais pra ser verdade...", userText: "Será que funciona mesmo?", next: 'objecao_funciona' }
+          { label: "Sim! Me mostra como estruturar isso", userText: "Quero aprender tudo!", next: 'apresenta_curso' },
+          { label: "Tenho uma dúvida antes", userText: "Tenho uma dúvida", next: 'doubts' }
         ]);
         break;
 
-      case 'q2_desempregado':
-        await addBotMessage("Cara, eu te entendo. Tá difícil conseguir emprego hoje em dia... 😔");
-        await addBotMessage("Mas deixa eu te contar uma coisa que vai mudar seu jogo:", 500);
-        await addBotMessage("<strong class='text-yellow-400'>A profissão de barbeiro é UMA DAS MAIS RENTÁVEIS do Brasil hoje.</strong> 💈", 400);
-        await addBotMessage("Você pode começar <strong>atendendo em casa</strong>, com investimento mínimo, e em 30 dias já ter uma renda de <strong class='text-green-400'>R$ 2.000 a R$ 4.000</strong>. 🔥", 500);
-        await addBotMessage("Quer ver como outros alunos saíram do desemprego e estão faturando? 💪", 500);
+      case 'q2_carreira':
+        await addBotMessage("Ótimo pensamento! 🎯");
+        await addBotMessage("Uma carreira bem estruturada começa com o domínio técnico. Quando você sabe CORTAR BEM, as oportunidades aparecem naturalmente.", 500);
+        await addBotMessage("Você pode trabalhar em barbearias reconhecidas, montar sua clientela própria, ou até abrir seu próprio negócio depois.", 500);
+        await addBotMessage("Tudo começa aprendendo as técnicas certas! ✂️", 500);
         renderOptions([
-          { label: "Quero sair dessa situação AGORA", userText: "Quero sair dessa!", next: 'apresenta_curso' },
-          { label: "Mas eu não tenho dinheiro pra investir", userText: "Não tenho dinheiro", next: 'objecao_dinheiro' }
+          { label: "Perfeito! Quero começar", userText: "Vamos começar!", next: 'apresenta_curso' },
+          { label: "Tenho mais dúvidas", userText: "Mais dúvidas", next: 'doubts' }
         ]);
         break;
 
-      case 'q2_renda_extra':
-        await addBotMessage("Boa! 👏 Ter uma renda extra é coisa de quem pensa grande!");
-        await addBotMessage("Olha só que louco:", 500);
-        await addBotMessage("<strong class='text-yellow-400'>Cortando apenas nos finais de semana, você pode faturar até R$ 2.500 por mês EXTRAS no seu bolso.</strong> 🤑", 500);
-        await addBotMessage("Isso é praticamente um salário a mais todo mês! E o melhor: você escolhe seus horários. ⏰", 500);
+      case 'q2_mudanca':
+        await addBotMessage("Uma mudança bem planejada começa com escolher a profissão CERTA. 🎯");
+        await addBotMessage("Barbeiro é uma profissão que oferece flexibilidade, reconhecimento e estabilidade de demanda — muito diferente de outras áreas.", 500);
+        await addBotMessage("Muitos alunos fizeram essa transição e nunca mais olharam pra trás. Quer conhecer a estrutura completa que funciona? 💪", 500);
         renderOptions([
-          { label: "QUERO essa renda extra!", userText: "Quero renda extra!", next: 'apresenta_curso' },
-          { label: "Como consigo clientes sendo iniciante?", userText: "Como conseguir clientes?", next: 'objecao_clientes' }
+          { label: "Quero conhecer a estrutura", userText: "Quero a estrutura completa", next: 'apresenta_curso' },
+          { label: "Qual o primeiro passo?", userText: "Qual é o primeiro passo?", next: 'apresenta_curso' }
         ]);
         break;
 
-      case 'q2_dor_tecnica':
-        await addBotMessage("Isso é mais comum do que você imagina... 😤");
-        await addBotMessage("Muitos barbeiros ficaram pra trás porque não dominam os <strong>cortes degradê, navalhado, social moderno, desenhos e técnicas com tesoura</strong>.", 500);
-        await addBotMessage("Mas agora presta atenção... 👀", 400);
-        await addBotMessage("<strong class='text-yellow-400'>Quando você domina TODAS as técnicas modernas, você pode cobrar de R$ 50 a R$ 150 por corte — e ainda fica com fila de espera!</strong> 🔥", 500);
+      case 'q2_tecnicas':
+        await addBotMessage("Excelente decisão! 🔥");
+        await addBotMessage("Quando você domina <strong>cortes degradê, navalhado, social moderno, desenhos e artes no cabelo</strong>, você se diferencia completamente dos demais profissionais.", 500);
+        await addBotMessage("Clientes procuram especificamente por profissionais que executam essas técnicas com qualidade. É pura oferta e demanda de mercado! 📈", 500);
+        await addBotMessage("Quer aprender tudo isso passo a passo? 🎓", 500);
         renderOptions([
-          { label: "Quero dominar essas técnicas!", userText: "Quero dominar tudo!", next: 'apresenta_curso' },
+          { label: "Quero dominar todas essas técnicas!", userText: "Quero dominar tudo!", next: 'apresenta_curso' },
           { label: "Em quanto tempo vou aprender?", userText: "Demora pra aprender?", next: 'objecao_tempo' }
         ]);
         break;
 
-      case 'q2_precificacao':
-        await addBotMessage("Essa é a <strong>virada de chave</strong> que transforma barbeiro comum em barbeiro TOP! 🏆");
-        await addBotMessage("<strong class='text-yellow-400'>Barbeiros que dominam técnicas premium cobram 3x mais pelo mesmo tempo de trabalho.</strong> 💰", 500);
-        await addBotMessage("Exemplo: um corte simples = R$ 25. Um corte degradê navalhado com desenho = R$ 80 a R$ 120. 🤯", 500);
-        await addBotMessage("Mesmo tempo, lucro MUITO maior! 📈", 400);
+      case 'q2_posicionamento':
+        await addBotMessage("Isso é estratégico! 🏆");
+        await addBotMessage("Profissionais reconhecidos por qualidade não competem por preço baixo — eles se posicionam por EXCELÊNCIA e DIFERENCIAL. É uma posição completamente diferente.", 500);
+        await addBotMessage("Quando você domina técnicas que poucos sabem fazer, o cliente <strong>procura por você</strong>, não você procurando por cliente. É totalmente diferente! 💎", 500);
         renderOptions([
-          { label: "Quero aprender a cobrar mais!", userText: "Quero aumentar meu ticket!", next: 'apresenta_curso' },
-          { label: "Meus clientes vão aceitar pagar mais?", userText: "Vão aceitar pagar mais?", next: 'objecao_precificacao' }
+          { label: "Quero essa posição no mercado!", userText: "Quero ser premium!", next: 'apresenta_curso' },
+          { label: "Como isso funciona na prática?", userText: "Como funciona na prática?", next: 'apresenta_curso' }
         ]);
         break;
 
-      case 'q2_barbearia':
-        await addBotMessage("Abrir sua própria barbearia é o sonho de todo profissional! 🏪✨");
-        await addBotMessage("<strong class='text-yellow-400'>Uma barbearia bem montada pode faturar de R$ 15.000 a R$ 50.000 por mês</strong> — e você sendo o dono! 💼", 500);
-        await addBotMessage("No curso eu te mostro não só as técnicas, mas também <strong>como estruturar, precificar e fidelizar clientes</strong>. Tudo que precisa! 📚", 500);
+      case 'q2_empreender':
+        await addBotMessage("Agora você pensa como empresário! 🚀");
+        await addBotMessage("Empreender em barbearia é viável porque o produto é seus CONHECIMENTOS e sua HABILIDADE. Você é o ativo principal.", 500);
+        await addBotMessage("No curso, além de técnicas, você aprende a estruturar um negócio que realmente funciona: desde atendimento até fidelização de clientes. 📚💼", 500);
         renderOptions([
-          { label: "Quero abrir minha barbearia!", userText: "Quero abrir minha barbearia!", next: 'apresenta_curso' },
-          { label: "Preciso de experiência primeiro?", userText: "Preciso ter experiência?", next: 'objecao_experiencia' }
+          { label: "Quero aprender tudo isso!", userText: "Entra o curso completo!", next: 'apresenta_curso' },
+          { label: "Qual a estrutura do negócio?", userText: "Como estruturar?", next: 'apresenta_curso' }
         ]);
         break;
 
-      case 'q2_referencia':
-        await addBotMessage("Agora você falou a MINHA língua! 🔥");
-        await addBotMessage("Ser referência significa <strong class='text-yellow-400'>ter agenda lotada, cobrar o que quiser, e nunca mais se preocupar com dinheiro</strong>. 🏆", 500);
-        await addBotMessage("Os barbeiros que chegam nesse nível faturam <strong>R$ 15.000+ por mês</strong> e viram os profissionais disputados da cidade. 💎", 500);
+      case 'q2_diferenciacao':
+        await addBotMessage("Diferenciação é OURO puro no mercado! 💎");
+        await addBotMessage("Quando você faz algo que 90% dos barbeiros não conseguem fazer, você automaticamente se torna ESPECIAL para o cliente.", 500);
+        await addBotMessage("E cliente que reconhece qualidade não reclama de valor — ele <strong>VOLTA sempre</strong> e ainda indica pra amigos! 🤝", 500);
         renderOptions([
-          { label: "É isso que eu quero!", userText: "Quero ser referência!", next: 'apresenta_curso' },
-          { label: "Preciso de mais informações", userText: "Me conta mais", next: 'apresenta_curso' }
+          { label: "Quero aprender a me diferenciar!", userText: "Quero me diferenciar!", next: 'apresenta_curso' },
+          { label: "Tenho outra pergunta", userText: "Outra pergunta", next: 'doubts' }
         ]);
         break;
 
@@ -787,5 +776,5 @@
     startConversation();
   })();
 </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f6bfa2ce623209e',t:'MTc3Nzk0NDU5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f6faf4953b41d07',t:'MTc3Nzk4MzQ3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
