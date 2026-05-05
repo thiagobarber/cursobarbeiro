@@ -186,8 +186,7 @@
       <!-- Chat Header -->
       <div class="bg-gradient-to-r from-red-900/40 via-black to-red-900/40 border-b border-red-900/30 p-4 flex items-center gap-3">
        <div class="relative">
-        <div class="avatar-badge w-12 h-12 rounded-full flex items-center justify-center border-2 border-red-500/50">
-         <i data-lucide="scissors" class="w-6 h-6 text-white"></i>
+        <div class="avatar-badge w-12 h-12 rounded-full flex items-center justify-center border-2 border-red-500/50 overflow-hidden"><img src="https://imgur.com/RG0zWDN.jpg" alt="Isaac" class="w-full h-full object-cover" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#7f1d1d'; this.alt='Isaac';">
         </div>
         <div class="online-indicator absolute bottom-0 right-0 border-2 border-black"></div>
        </div>
@@ -253,8 +252,8 @@
           const msg = document.createElement('div');
           msg.className = 'msg-bot flex items-start gap-2 max-w-[90%]';
           msg.innerHTML = `
-            <div class="avatar-badge w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-              <i data-lucide="scissors" class="w-4 h-4 text-white"></i>
+            <div class="avatar-badge w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1 border border-red-500/30 overflow-hidden">
+              <img src="https://imgur.com/RG0zWDN.jpg" alt="Isaac" class="w-full h-full object-cover" loading="lazy" onerror="this.style.background='#7f1d1d';"/>
             </div>
             <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 text-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-lg border border-red-900/20">
               <p class="text-sm md:text-base leading-relaxed">${text}</p>
@@ -288,8 +287,8 @@
     typing.id = 'typing-indicator';
     typing.className = 'flex items-start gap-2';
     typing.innerHTML = `
-      <div class="avatar-badge w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">
-        <i data-lucide="scissors" class="w-4 h-4 text-white"></i>
+      <div class="avatar-badge w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 border border-red-500/30 overflow-hidden">
+        <img src="https://imgur.com/RG0zWDN.jpg" alt="Isaac" class="w-full h-full object-cover" loading="lazy" onerror="this.style.background='#7f1d1d';"/>
       </div>
       <div class="bg-neutral-800 rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-1.5">
         <span class="typing-dot w-2 h-2 bg-red-400 rounded-full"></span>
@@ -391,7 +390,7 @@
     const welcome = (window.elementSdk?.config?.welcome_message) || defaultConfig.welcome_message;
     
     await addBotMessage(welcome);
-    await addBotMessage("Eu sou o <strong>Isaac</strong> e tô aqui pra te mostrar como você pode <strong class='text-yellow-400'>faturar de R$ 3.000 a R$ 10.000 por mês</strong> como barbeiro profissional. 💈✂️", 400);
+    await addBotMessage("Tô aqui pra te mostrar como você pode <strong class='text-yellow-400'>faturar de R$ 3.000 a R$ 10.000 por mês</strong> como barbeiro profissional. 💈✂️", 400);
     await addBotMessage("Antes de tudo, me conta uma coisa rapidinha... 👇", 400);
     
     renderOptions([
@@ -788,5 +787,5 @@
     startConversation();
   })();
 </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f6bd81a1281ac02',t:'MTc3Nzk0MzIwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f6bfa2ce623209e',t:'MTc3Nzk0NDU5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
