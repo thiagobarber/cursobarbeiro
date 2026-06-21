@@ -33,7 +33,7 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             height: 100%;
-            overflow: hidden; /* Trava o scroll da página inteira no mobile */
+            overflow: hidden;
         }
 
         body {
@@ -46,7 +46,7 @@
             width: 100%;
             max-width: 480px;
             height: 100%;
-            max-height: 100vh; /* Garante que nunca passe do tamanho físico da tela */
+            max-height: 100vh;
             background: var(--bg-color);
             position: relative;
             display: flex;
@@ -75,7 +75,7 @@
             flex-direction: column;
             flex-grow: 1;
             height: 100%;
-            justify-content: space-between; /* Força o conteúdo para cima e o CTA para a base */
+            justify-content: space-between;
         }
 
         .screen.active {
@@ -84,7 +84,6 @@
             transform: translateY(0);
         }
 
-        /* Scroll interno apenas para o bloco de conteúdo se a tela for muito pequena */
         .scrollable-content {
             flex-grow: 1;
             overflow-y: auto;
@@ -96,7 +95,6 @@
             display: none;
         }
 
-        /* Hero Image Section */
         .hero-wrapper {
             position: relative;
             width: 100%;
@@ -108,12 +106,8 @@
             flex-shrink: 0;
         }
 
-        @media (min-height: 660px) {
-            .hero-wrapper { height: 180px; }
-        }
-        @media (min-height: 750px) {
-            .hero-wrapper { height: 210px; }
-        }
+        @media (min-height: 660px) { .hero-wrapper { height: 180px; } }
+        @media (min-height: 750px) { .hero-wrapper { height: 210px; } }
 
         .hero-image {
             width: 100%;
@@ -130,7 +124,6 @@
             background: linear-gradient(0deg, rgba(11, 11, 11, 1) 0%, rgba(11, 11, 11, 0.2) 50%, rgba(11, 11, 11, 0) 100%);
         }
 
-        /* Typography */
         h1 {
             font-size: 19px;
             font-weight: 700;
@@ -149,7 +142,6 @@
         }
         @media (min-height: 660px) { .subtitle { font-size: 13px; margin-bottom: 16px; } }
 
-        /* Info Cards */
         .info-grid {
             display: flex;
             flex-direction: column;
@@ -172,7 +164,6 @@
 
         .info-card span { font-size: 14px; }
 
-        /* Header Quiz Component */
         .quiz-header {
             width: 100%;
             margin-bottom: 16px;
@@ -208,7 +199,6 @@
             box-shadow: 0 0 12px rgba(255, 122, 0, 0.4);
         }
 
-        /* Quiz Layout */
         .quiz-question {
             font-size: 17px;
             font-weight: 600;
@@ -226,7 +216,6 @@
         }
         @media (min-height: 660px) { .options-stack { gap: 10px; } }
 
-        /* Buttons & Interaction */
         .btn-option {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -266,7 +255,7 @@
             width: 100%;
             letter-spacing: 0.5px;
             box-shadow: 0 8px 24px rgba(255, 122, 0, 0.25);
-            flex-shrink: 0; /* Impede o botão de deformar em telas menores */
+            flex-shrink: 0;
         }
         @media (min-height: 660px) { .btn-primary { padding: 16px 20px; } }
 
@@ -274,7 +263,6 @@
             background: var(--primary-hover);
         }
 
-        /* Results Screen */
         .success-card {
             background: linear-gradient(135deg, #161616 0%, #1c1c1c 100%);
             border: 1px solid var(--card-border);
@@ -306,7 +294,6 @@
             font-size: 13px;
         }
 
-        /* Loading Animation */
         .loading-container {
             display: flex;
             flex-direction: column;
@@ -344,12 +331,12 @@
                 </div>
                 
                 <h1>✂️ Você não precisa ter experiência para começar.</h1>
-                <p class="subtitle">Descubra em menos de 30 segundos como este treinamento pode ajudar você a aprender do zero ou aperfeiçoar suas técnicas.</p>
+                <p class="subtitle">Descubra em menos de 30 segundos como este treinamento completo se adapta ao seu nível para acelerar seus resultados profissionais.</p>
                 
                 <div class="info-grid">
                     <div class="info-card"><span>⏱</span> Menos de 30 segundos</div>
                     <div class="info-card"><span>📱</span> Acesso totalmente online</div>
-                    <div class="info-card"><span>🎯</span> Ideal para iniciantes e barbeiros que desejam evoluir</div>
+                    <div class="info-card"><span>🎯</span> Ideal para iniciantes e barbeiros experientes</div>
                 </div>
             </div>
             
@@ -364,12 +351,12 @@
             </div>
             
             <div class="scrollable-content">
-                <h2 class="quiz-question">Qual é seu maior objetivo hoje?</h2>
+                <h2 class="quiz-question">Qual é o seu nível atual de conhecimento na barbearia?</h2>
                 <div class="options-stack">
-                    <button class="btn-option" onclick="selectOption('q2')">Aprender do zero</button>
-                    <button class="btn-option" onclick="selectOption('q2')">Melhorar minha técnica</button>
-                    <button class="btn-option" onclick="selectOption('q2')">Atender mais clientes</button>
-                    <button class="btn-option" onclick="selectOption('q2')">Ainda estou decidindo</button>
+                    <button class="btn-option" onclick="selectOption('q2')">Não sei nada (Quero começar do zero absoluto)</button>
+                    <button class="btn-option" onclick="selectOption('q2')">Básico (Sei o básico, mas falta confiança e prática)</button>
+                    <button class="btn-option" onclick="selectOption('q2')">Experiente (Já corto, mas quero dominar técnicas avançadas)</button>
+                    <button class="btn-option" onclick="selectOption('q2')">Profissional (Quero me atualizar e focar em alta performance)</button>
                 </div>
             </div>
         </div>
@@ -382,12 +369,12 @@
             </div>
             
             <div class="scrollable-content">
-                <h2 class="quiz-question">O que mais dificulta sua evolução?</h2>
+                <h2 class="quiz-question">O que você considera mais importante em um treinamento de barbearia?</h2>
                 <div class="options-stack">
-                    <button class="btn-option" onclick="selectOption('q3')">Falta de prática</button>
-                    <button class="btn-option" onclick="selectOption('q3')">Falta de orientação</button>
-                    <button class="btn-option" onclick="selectOption('q3')">Insegurança para cortar</button>
-                    <button class="btn-option" onclick="selectOption('q3')">Quero aperfeiçoar meus resultados</button>
+                    <button class="btn-option" onclick="selectOption('q3')">Um passo a passo didático, simples e direto ao ponto</button>
+                    <button class="btn-option" onclick="selectOption('q3')">Técnicas avançadas (Fades perfeitos, texturizações e barboterapia)</button>
+                    <button class="btn-option" onclick="selectOption('q3')">Suporte e acompanhamento direto para tirar dúvidas</button>
+                    <button class="btn-option" onclick="selectOption('q3')">Aprender a atrair, fidelizar e gerenciar clientes</button>
                 </div>
             </div>
         </div>
@@ -400,12 +387,12 @@
             </div>
             
             <div class="scrollable-content">
-                <h2 class="quiz-question">Se tivesse acesso a um método organizado, qual seria seu principal interesse?</h2>
+                <h2 class="quiz-question">Se você tivesse acesso a um método estruturado e validado hoje, qual seria sua prioridade?</h2>
                 <div class="options-stack">
-                    <button class="btn-option" onclick="selectOption('loading')">Aprender passo a passo</button>
-                    <button class="btn-option" onclick="selectOption('loading')">Evoluir minhas técnicas</button>
-                    <button class="btn-option" onclick="selectOption('loading')">Trabalhar com mais confiança</button>
-                    <button class="btn-option" onclick="selectOption('loading')">Conhecer o treinamento</button>
+                    <button class="btn-option" onclick="selectOption('loading')">Aprender de forma correta sem perder tempo com erros</button>
+                    <button class="btn-option" onclick="selectOption('loading')">Aperfeiçoar meus cortes para cobrar mais caro pelo meu serviço</button>
+                    <button class="btn-option" onclick="selectOption('loading')">Trabalhar com total segurança e dominar a agenda</button>
+                    <button class="btn-option" onclick="selectOption('loading')">Acessar o treinamento imediatamente para conhecer o método</button>
                 </div>
             </div>
         </div>
@@ -414,7 +401,7 @@
         <div id="screen-loading" class="screen">
             <div class="loading-container">
                 <div class="spinner"></div>
-                <p style="color: var(--text-muted); font-size: 13px; font-weight: 500;">Processando suas respostas...</p>
+                <p style="color: var(--text-muted); font-size: 13px; font-weight: 500;">Analisando perfil profissional...</p>
             </div>
         </div>
 
@@ -427,19 +414,18 @@
             
             <div class="scrollable-content">
                 <div class="success-card">
-                    <h2 style="font-size: 17px; font-weight: 600; margin-bottom: 8px; line-height: 1.4;">Seu perfil demonstra interesse em evoluir na barbearia.</h2>
-                    <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">Com base nas suas respostas, conhecer um método estruturado pode ser um excelente próximo passo para aprender novas técnicas ou aperfeiçoar seu trabalho.</p>
+                    <h2 style="font-size: 17px; font-weight: 600; margin-bottom: 8px; line-height: 1.4;">Seu perfil possui total compatibilidade com a metodologia.</h2>
+                    <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">O cronograma do treinamento foi desenhado estrategicamente tanto para quem está começando do zero absoluto quanto para profissionais que buscam refinamento técnico avançado e diferenciação de mercado.</p>
                     
                     <ul class="benefits-list">
-                        <li class="benefit-item"><span class="benefit-icon">✔</span> Aulas organizadas</li>
-                        <li class="benefit-item"><span class="benefit-icon">✔</span> Conteúdo para iniciantes e aperfeiçoamento</li>
-                        <li class="benefit-item"><span class="benefit-icon">✔</span> Acesso online</li>
-                        <li class="benefit-item"><span class="benefit-icon">✔</span> Estude quando quiser</li>
+                        <li class="benefit-item"><span class="benefit-icon">✔</span> Do Zero ao Avançado (Passo a Passo Prático)</li>
+                        <li class="benefit-item"><span class="benefit-icon">✔</span> Técnicas de Aperfeiçoamento e Tendências</li>
+                        <li class="benefit-item"><span class="benefit-icon">✔</span> Plataforma Online com Acesso Imediato</li>
+                        <li class="benefit-item"><span class="benefit-icon">✔</span> Assista e treine no seu próprio ritmo</li>
                     </ul>
                 </div>
             </div>
             
-            <!-- Alinhado perfeitamente na base estrutural da tela, sem quebra de fluxo ou necessidade de scroll -->
             <a href="https://kiwify.app/KfMi9ik?afid=KiBYsNLa" class="btn-primary">QUERO CONHECER O TREINAMENTO</a>
         </div>
 
@@ -457,7 +443,7 @@
                     const nextTarget = document.getElementById(`screen-${screenId}`);
                     nextTarget.classList.add('active');
                     
-                    nextTarget.offsetHeight; // Force layout reflow
+                    nextTarget.offsetHeight;
                     
                     nextTarget.style.opacity = '1';
                     nextTarget.style.transform = 'translateY(0)';
